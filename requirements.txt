@@ -1,0 +1,4 @@
+Django==4.2.7
+razorpay==1.4.1
+python-decouple==3.8
+python-dotenv==1.0.0

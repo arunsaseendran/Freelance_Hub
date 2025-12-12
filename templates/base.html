@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Freelancer Service Booking Platform{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --primary-color: #667eea;
+            --secondary-color: #2c5364;
+            --accent-color: #f5576c;
+            --success-color: #00f2fe;
+            
+            /* Dark Theme Colors */
+            --bg-primary: #0f0f1e;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #252538;
+            --bg-card: #1e1e30;
+            --text-primary: #e8e8f0;
+            --text-secondary: #a0a0b8;
+            --text-muted: #6b6b85;
+            --border-color: #2d2d45;
+            --hover-bg: #2a2a42;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(15, 15, 30, 0.8);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.2rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: sticky;
+            top: 0;
+            z-index: 1040;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(15, 15, 30, 0.95);
+            padding: 0.8rem 0;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white !important;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-brand i {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover i {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            background: rgba(102, 126, 234, 0.15);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover::before {
+            width: 80%;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 0.3rem;
+        }
+        
+        /* Button Styles */
+        .btn {
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-gradient);
+            border: none;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-light {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+        
+        /* Card Styles */
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--bg-card);
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            color: var(--text-primary);
+        }
+        
+        .card-text {
+            color: var(--text-secondary);
+        }
+        
+        /* Glass Card Effect */
+        .glass-card {
+            background: rgba(30, 30, 48, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #0a0a15 0%, #0f2027 50%, #1a1a2e 100%);
+            color: var(--text-primary);
+            padding: 3rem 0 1.5rem;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+        }
+        
+        .footer h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer a:hover {
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+        
+        .text-white-50 {
+            color: var(--text-secondary) !important;
+        }
+        
+        /* Rating Styles */
+        .rating {
+            color: #fbbf24;
+            text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+        }
+        
+        /* Badge Styles */
+        .badge-status {
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Service Card Images */
+        .service-card img {
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Stat Card */
+        .stat-card {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(44, 83, 100, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(44, 83, 100, 0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Dropdown Menu */
+        .dropdown-menu {
+            background: rgba(30, 30, 48, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            padding: 0.8rem;
+            z-index: 1050 !important;
+            margin-top: 1rem;
+            animation: dropdownSlide 0.3s ease-out;
+        }
+        
+        @keyframes dropdownSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dropdown-item {
+            color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .dropdown-item i {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item:hover i {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .dropdown-divider {
+            border-color: var(--border-color);
+        }
+        
+        /* Alert Styles */
+        .alert {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gradient);
+        }
+        
+        /* Form Styles */
+        .form-control, .form-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 10px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background: var(--bg-card);
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .form-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Table Styles */
+        .table {
+            color: var(--text-primary);
+        }
+        
+        .table thead th {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .table tbody td {
+            border-color: var(--border-color);
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .table-hover tbody tr:hover {
+            background: var(--hover-bg);
+        }
+        
+        /* Modal Styles */
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .modal-header {
+            border-bottom-color: var(--border-color);
+        }
+        
+        .modal-footer {
+            border-top-color: var(--border-color);
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
+        
+        /* Additional Dark Theme Utilities */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+        }
+        
+        p, span, div {
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--primary-color);
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+        
+        .bg-light {
+            background: var(--bg-tertiary) !important;
+        }
+        
+        .border {
+            border-color: var(--border-color) !important;
+        }
+        
+        hr {
+            border-color: var(--border-color);
+            opacity: 1;
+        }
+        
+        /* Badge Overrides */
+        .badge {
+            font-weight: 600;
+        }
+        
+        .bg-secondary {
+            background-color: var(--bg-tertiary) !important;
+        }
+        
+        /* Navbar Toggler for Dark Theme */
+        .navbar-toggler {
+            border-color: var(--border-color);
+        }
+        
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+        
+        /* List Group Dark Theme */
+        .list-group-item {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .list-group-item:hover {
+            background: var(--hover-bg);
+        }
+        
+        /* Pagination Dark Theme */
+        .pagination .page-link {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .pagination .page-link:hover {
+            background: var(--hover-bg);
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+        
+        .pagination .page-item.active .page-link {
+            background: var(--primary-gradient);
+            border-color: var(--primary-color);
+        }
+        
+        /* Breadcrumb Dark Theme */
+        .breadcrumb {
+            background: var(--bg-tertiary);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--primary-color);
+        }
+        
+        /* Progress Bar Dark Theme */
+        .progress {
+            background: var(--bg-tertiary);
+        }
+        
+        /* Tooltip Dark Theme */
+        .tooltip-inner {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        /* Popover Dark Theme */
+        .popover {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+        }
+        
+        .popover-header {
+            background: var(--bg-tertiary);
+            border-bottom-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .popover-body {
+            color: var(--text-secondary);
+        }
+        
+        /* Input Group Dark Theme */
+        .input-group-text {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        /* Nav Tabs/Pills Dark Theme */
+        .nav-tabs {
+            border-bottom-color: var(--border-color);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--text-secondary);
+            border-color: transparent;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: var(--bg-card);
+            border-color: var(--border-color) var(--border-color) var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        .nav-pills .nav-link.active {
+            background: var(--primary-gradient);
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="bi bi-briefcase-fill"></i> FreelanceHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'services:service_list' %}">
+                            <i class="bi bi-grid"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'services:category_list' %}">
+                            <i class="bi bi-tags"></i> Categories
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:freelancer_list' %}">
+                            <i class="bi bi-people"></i> Freelancers
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.user_type == 'admin' or user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:admin_dash' %}">
+                                <i class="bi bi-shield-check"></i> Admin Panel
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:dashboard' %}">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                                    <i class="bi bi-person"></i> Profile
+                                </a></li>
+                                {% if user.user_type == 'freelancer' %}
+                                    <li><a class="dropdown-item" href="{% url 'services:my_services' %}">
+                                        <i class="bi bi-briefcase"></i> My Services
+                                    </a></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="{% url 'bookings:my_bookings' %}">
+                                    <i class="bi bi-calendar-check"></i> My Bookings
+                                </a></li>
+                                {% if user.user_type == 'admin' or user.is_superuser %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:admin_dash' %}">
+                                    <i class="bi bi-shield-check"></i> Admin Dashboard
+                                </a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:login' %}">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light btn-sm ms-2" href="{% url 'accounts:register' %}">
+                                <i class="bi bi-person-plus"></i> Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-briefcase-fill"></i> FreelanceHub</h5>
+                    <p>Connect with skilled freelancers for all your service needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'services:service_list' %}" class="text-white-50">Services</a></li>
+                        <li><a href="{% url 'accounts:freelancer_list' %}" class="text-white-50">Freelancers</a></li>
+                        <li><a href="{% url 'services:category_list' %}" class="text-white-50">Categories</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50">
+                        <i class="bi bi-envelope"></i> support@freelancehub.com<br>
+                        <i class="bi bi-phone"></i> +91 1234567890
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center text-white-50">
+                <p>&copy; 2025 FreelanceHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Navbar Scroll Effect -->
+    <script>
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

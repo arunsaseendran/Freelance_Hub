@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Dashboard - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+        border-radius: 0 0 30px 30px;
+    }
+    
+    .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #2c5364 0%, #667eea 100%);
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+    }
+    
+    .stat-card h6 {
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .stat-card h2 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        background: linear-gradient(90deg, #2c5364 0%, #667eea 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+    
+    .action-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .table-card {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    
+    .table-card .card-header {
+        background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #667eea 100%);
+        color: white;
+        border: none;
+        padding: 1.5rem;
+    }
+    
+    .table-card .card-body {
+        background: var(--bg-card);
+        color: var(--text-primary);
+    }
+    
+    .table-dark-custom {
+        background: var(--bg-card);
+        color: var(--text-primary);
+    }
+    
+    .table-dark-custom th {
+        background: rgba(30, 30, 48, 0.8);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+        font-weight: 600;
+    }
+    
+    .table-dark-custom td {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+    }
+    
+    .table-dark-custom tbody tr:hover {
+        background: rgba(102, 126, 234, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div class="container">
+        <h1 class="fw-bold mb-2"><i class="bi bi-person-circle me-2"></i> Customer Dashboard</h1>
+        <p class="lead mb-0">Welcome back! Here's your booking overview</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Quick Stats -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Total Bookings</h6>
+                <h2>{{ my_bookings.count }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Pending</h6>
+                <h2>{{ pending_bookings.count }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Accepted</h6>
+                <h2>{{ accepted_bookings.count }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Completed</h6>
+                <h2>{{ completed_bookings.count }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card action-card">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-4"><i class="bi bi-lightning-fill me-2"></i>Quick Actions</h5>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-lg">
+                            <i class="bi bi-search me-2"></i> Browse Services
+                        </a>
+                        <a href="{% url 'accounts:freelancer_list' %}" class="btn btn-success btn-lg">
+                            <i class="bi bi-people me-2"></i> Find Freelancers
+                        </a>
+                        <a href="{% url 'bookings:my_bookings' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-calendar-check me-2"></i> All Bookings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Bookings -->
+    <div class="row pb-5">
+        <div class="col-md-12">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold"><i class="bi bi-clock-history me-2"></i> Recent Bookings</h5>
+                </div>
+                <div class="card-body">
+                    {% if my_bookings %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-dark-custom">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Freelancer</th>
+                                    <th>Date & Time</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in my_bookings %}
+                                <tr>
+                                    <td>{{ booking.service.title }}</td>
+                                    <td>{{ booking.freelancer.get_full_name }}</td>
+                                    <td>{{ booking.booking_date }} {{ booking.booking_time }}</td>
+                                    <td>
+                                        {% if booking.status == 'pending' %}
+                                            <span class="badge bg-warning">Pending</span>
+                                        {% elif booking.status == 'accepted' %}
+                                            <span class="badge bg-info">Accepted</span>
+                                        {% elif booking.status == 'completed' %}
+                                            <span class="badge bg-success">Completed</span>
+                                        {% elif booking.status == 'cancelled' %}
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        {% elif booking.status == 'rejected' %}
+                                            <span class="badge bg-secondary">Rejected</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>₹{{ booking.total_amount }}</td>
+                                    <td>
+                                        <a href="{% url 'bookings:booking_detail' booking.id %}" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                        {% if booking.status == 'completed' and not booking.review %}
+                                        <a href="{% url 'reviews:create_review' booking.id %}" class="btn btn-sm btn-warning">
+                                            <i class="bi bi-star"></i> Review
+                                        </a>
+                                        {% endif %}
+                                        {% if booking.can_cancel %}
+                                        <a href="{% url 'bookings:cancel_booking' booking.id %}" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-x-circle"></i> Cancel
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-calendar-x" style="font-size: 4rem; color: #ccc;"></i>
+                        <h4 class="mt-3">No bookings yet</h4>
+                        <p class="text-muted">Start by browsing our services</p>
+                        <a href="{% url 'services:service_list' %}" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Browse Services
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

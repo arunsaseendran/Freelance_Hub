@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Email - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .otp-container {
+        padding: 5rem 0;
+    }
+    
+    .otp-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        padding: 3rem;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+        color: var(--text-primary);
+    }
+    
+    .otp-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        color: white;
+        font-size: 2rem;
+    }
+    
+    .otp-input {
+        font-size: 1.8rem !important;
+        letter-spacing: 0.8rem !important;
+        text-align: center !important;
+        padding: 1rem !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: 15px !important;
+        font-weight: 600;
+        background: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .otp-input:focus {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+        background: var(--bg-card) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .resend-btn {
+        background: none;
+        border: none;
+        color: #667eea;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    
+    .resend-btn:hover {
+        color: #764ba2;
+    }
+    
+    .resend-btn:disabled {
+        color: #6c757d;
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+    
+    .timer {
+        color: #dc3545;
+        font-weight: 600;
+    }
+    
+    .email-display {
+        background: var(--bg-tertiary);
+        padding: 1rem;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+        margin: 1rem 0;
+        color: var(--text-primary);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container otp-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow otp-card">
+        <div class="otp-icon">
+            <i class="bi bi-envelope-check"></i>
+        </div>
+        
+        <h2 class="mb-3" style="color: var(--text-primary);">Verify Your Email</h2>
+        <p class="mb-4" style="color: var(--text-secondary);">
+            We've sent a 6-digit verification code to:
+        </p>
+        
+        <div class="email-display">
+            <strong>{{ email }}</strong>
+        </div>
+        
+        <form method="post" id="otpForm">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                {{ form.otp }}
+                {% if form.otp.errors %}
+                    <div class="text-danger mt-2">
+                        {% for error in form.otp.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <small class="form-text text-muted mt-2">
+                    {{ form.otp.help_text }}
+                </small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                <i class="bi bi-check-circle me-2"></i>Verify & Complete Registration
+            </button>
+        </form>
+        
+        <div class="text-center">
+            <p class="mb-2" style="color: var(--text-secondary);">Didn't receive the code?</p>
+            <button type="button" class="resend-btn" id="resendBtn" onclick="resendOTP()">
+                Resend OTP
+            </button>
+            <div id="timer" class="timer mt-2" style="display: none;"></div>
+        </div>
+        
+        <hr class="my-4" style="border-color: var(--border-color);">
+        
+        <div class="text-center">
+            <a href="{% url 'accounts:register' %}" style="color: var(--text-secondary); text-decoration: none;">
+                <i class="bi bi-arrow-left me-1"></i>Back to Registration
+            </a>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let resendTimer = 0;
+let timerInterval;
+
+function resendOTP() {
+    const resendBtn = document.getElementById('resendBtn');
+    const timerDiv = document.getElementById('timer');
+    
+    // Disable button and start timer
+    resendBtn.disabled = true;
+    resendTimer = 60; // 60 seconds cooldown
+    timerDiv.style.display = 'block';
+    
+    // Send AJAX request
+    fetch('{% url "accounts:resend_otp" %}', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show mt-3';
+            alertDiv.innerHTML = `
+                <i class="bi bi-check-circle me-2"></i>${data.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.otp-card').appendChild(alertDiv);
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        } else {
+            // Show error message
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-danger alert-dismissible fade show mt-3';
+            alertDiv.innerHTML = `
+                <i class="bi bi-exclamation-triangle me-2"></i>${data.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.otp-card').appendChild(alertDiv);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to resend OTP. Please try again.');
+    });
+    
+    // Start countdown timer
+    timerInterval = setInterval(() => {
+        timerDiv.textContent = `Resend available in ${resendTimer} seconds`;
+        resendTimer--;
+        
+        if (resendTimer < 0) {
+            clearInterval(timerInterval);
+            resendBtn.disabled = false;
+            resendBtn.textContent = 'Resend OTP';
+            timerDiv.style.display = 'none';
+        }
+    }, 1000);
+}
+
+// Auto-focus on OTP input
+document.addEventListener('DOMContentLoaded', function() {
+    const otpInput = document.getElementById('id_otp');
+    if (otpInput) {
+        otpInput.focus();
+        
+        // Auto-submit when 6 digits are entered
+        otpInput.addEventListener('input', function() {
+            if (this.value.length === 6) {
+                // Small delay to allow user to see the complete input
+                setTimeout(() => {
+                    document.getElementById('otpForm').submit();
+                }, 500);
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

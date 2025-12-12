@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-interface {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 2rem;
+        color: white;
+        margin-bottom: 2rem;
+    }
+    
+    .payment-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .payment-method-btn {
+        background: white;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .payment-method-btn:hover {
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .payment-method-btn.active {
+        border-color: #667eea;
+        background: #f0f4ff;
+    }
+    
+    .payment-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h2 class="mb-4"><i class="bi bi-credit-card me-2"></i> Complete Payment</h2>
+                    
+                    <!-- Payment Summary -->
+                    <div class="alert alert-info">
+                        <h5 class="mb-3"><i class="bi bi-receipt me-2"></i>Payment Summary</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="mb-2"><strong>Service:</strong></p>
+                                <p class="mb-2"><strong>Freelancer:</strong></p>
+                                <p class="mb-0"><strong>Amount:</strong></p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="mb-2">{{ booking.service.title }}</p>
+                                <p class="mb-2">{{ booking.freelancer.get_full_name }}</p>
+                                <p class="mb-0 fs-4 fw-bold text-success">₹{{ payment.amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dummy Payment Interface -->
+                    <div class="payment-interface">
+                        <h4 class="mb-4 text-center">
+                            <i class="bi bi-shield-check me-2"></i>Secure Payment Gateway
+                        </h4>
+                        
+                        <!-- Payment Methods -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="payment-method-btn active text-center">
+                                    <div class="payment-icon">💳</div>
+                                    <div class="fw-bold">Credit Card</div>
+                                    <small class="text-muted">Visa, Mastercard</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="payment-method-btn text-center">
+                                    <div class="payment-icon">📱</div>
+                                    <div class="fw-bold">UPI</div>
+                                    <small class="text-muted">GPay, PhonePe</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="payment-method-btn text-center">
+                                    <div class="payment-icon">🏦</div>
+                                    <div class="fw-bold">Net Banking</div>
+                                    <small class="text-muted">All Banks</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dummy Card Details -->
+                        <div class="payment-card">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Number</label>
+                                <input type="text" class="form-control" placeholder="1234 5678 9012 3456" value="4532 1234 5678 9010" readonly>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">Expiry Date</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" value="12/25" readonly>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">CVV</label>
+                                    <input type="text" class="form-control" placeholder="123" value="123" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <small><i class="bi bi-lock-fill me-1"></i>Your payment is secured with 256-bit SSL encryption</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Form -->
+                    <form method="post" action="{% url 'payments:confirm_payment' payment.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="transaction_id" value="TXN{{ payment.id }}{{ booking.id }}DEMO">
+                        
+                        <button type="submit" class="btn btn-success btn-lg w-100 mb-3">
+                            <i class="bi bi-check-circle me-2"></i> Confirm Payment of ₹{{ payment.amount }}
+                        </button>
+                        
+                        <div class="text-center text-muted small">
+                            <i class="bi bi-info-circle me-1"></i>This is a demo payment interface. Click confirm to proceed.
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'bookings:booking_detail' booking.id %}" class="text-muted">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Booking
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

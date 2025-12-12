@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="mb-4">{{ title }}</h2>
+                    
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Please correct the following errors:</strong>
+                            <ul class="mb-0 mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field|title }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endif %}
+                    
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <div class="text-danger">{{ form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Subcategory (Optional)</label>
+                            {{ form.subcategory }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Service Title</label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Price (₹)</label>
+                                {{ form.price }}
+                                {% if form.price.errors %}
+                                    <div class="text-danger">{{ form.price.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Duration (minutes)</label>
+                                {{ form.duration }}
+                                {% if form.duration.errors %}
+                                    <div class="text-danger">{{ form.duration.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Service Image</label>
+                            {{ form.image }}
+                            {% if form.image.errors %}
+                                <div class="text-danger mt-1">{{ form.image.errors }}</div>
+                            {% endif %}
+                            {% if service.image %}
+                                <div class="mt-2">
+                                    <p class="text-muted small mb-1">Current image:</p>
+                                    <img src="{{ service.image.url }}" alt="Current image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                    <p class="text-muted small mt-1">Choose a new file to replace this image</p>
+                                </div>
+                            {% else %}
+                                <p class="text-muted small mt-1">No image uploaded yet. Choose a file to add an image.</p>
+                            {% endif %}
+                            <small class="text-muted d-block mt-1">
+                                Supported formats: JPG, PNG, GIF | Max size: 5MB | Recommended: 800x600px
+                            </small>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            {{ form.is_active }}
+                            <label class="form-check-label" for="id_is_active">
+                                Service is active
+                            </label>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Save Service
+                            </button>
+                            <a href="{% url 'services:my_services' %}" class="btn btn-secondary">
+                                <i class="bi bi-x"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Image preview and validation
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.querySelector('input[type="file"][name="image"]');
+        
+        if (imageInput) {
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    // Validate file size (5MB max)
+                    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+                    if (file.size > maxSize) {
+                        alert('File size is too large! Maximum size is 5MB. Your file is ' + 
+                              (file.size / 1024 / 1024).toFixed(2) + 'MB');
+                        imageInput.value = '';
+                        return;
+                    }
+                    
+                    // Validate file type
+                    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+                    if (!validTypes.includes(file.type)) {
+                        alert('Invalid file type! Please upload JPG, PNG, or GIF images only.');
+                        imageInput.value = '';
+                        return;
+                    }
+                    
+                    // Show file info
+                    console.log('Image selected:', file.name, 
+                               'Size:', (file.size / 1024).toFixed(2) + 'KB',
+                               'Type:', file.type);
+                    
+                    // Create preview (optional)
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Find or create preview container
+                        let previewContainer = document.getElementById('new-image-preview');
+                        if (!previewContainer) {
+                            previewContainer = document.createElement('div');
+                            previewContainer.id = 'new-image-preview';
+                            previewContainer.className = 'mt-2';
+                            imageInput.parentElement.appendChild(previewContainer);
+                        }
+                        
+                        previewContainer.innerHTML = `
+                            <p class="text-success small mb-1">
+                                <i class="bi bi-check-circle"></i> New image selected: ${file.name}
+                            </p>
+                            <img src="${e.target.result}" alt="Preview" class="img-thumbnail" 
+                                 style="max-width: 200px; max-height: 200px;">
+                            <p class="text-muted small mt-1">This image will be uploaded when you save the form</p>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // Form submission confirmation
+        const form = document.querySelector('form[enctype="multipart/form-data"]');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const imageInput = document.querySelector('input[type="file"][name="image"]');
+                if (imageInput && imageInput.files.length > 0) {
+                    console.log('Form submitted with image:', imageInput.files[0].name);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

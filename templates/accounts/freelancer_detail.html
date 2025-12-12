@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ freelancer.get_full_name }} - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <!-- Profile Info -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if freelancer.profile_picture %}
+                    <img src="{{ freelancer.profile_picture.url }}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="{{ freelancer.get_full_name }}">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 150px; color: #ccc;"></i>
+                    {% endif %}
+                    
+                    <h4>{{ freelancer.get_full_name }}</h4>
+                    <p class="text-muted">@{{ freelancer.username }}</p>
+                    
+                    <div class="mb-3">
+                        <span class="rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= profile.rating %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <div>{{ profile.rating }}/5 ({{ profile.total_reviews }} reviews)</div>
+                    </div>
+                    
+                    {% if profile.is_available %}
+                        <span class="badge bg-success mb-3">Available</span>
+                    {% else %}
+                        <span class="badge bg-secondary mb-3">Unavailable</span>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <div class="text-start">
+                        <p><i class="bi bi-geo-alt"></i> {{ freelancer.city }}, {{ freelancer.area }}</p>
+                        <p><i class="bi bi-pin-map"></i> {{ freelancer.pincode }}</p>
+                        <p><i class="bi bi-briefcase"></i> {{ profile.experience_years }} years experience</p>
+                        <p><i class="bi bi-cash"></i> ₹{{ profile.hourly_rate }}/hour</p>
+                        <p><i class="bi bi-credit-card"></i> {{ profile.get_payment_mode_display }}</p>
+                        <p><i class="bi bi-check-circle"></i> {{ profile.completed_bookings }} jobs completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services and Reviews -->
+        <div class="col-md-8">
+            <!-- Bio -->
+            {% if profile.bio %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5><i class="bi bi-person"></i> About</h5>
+                    <p>{{ profile.bio }}</p>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Skills -->
+            {% if skills_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5><i class="bi bi-tools"></i> Skills</h5>
+                    <div>
+                        {% for skill in skills_list %}
+                        <span class="badge bg-primary me-1 mb-1">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Services -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-grid"></i> Services Offered</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        {% for service in services %}
+                        <div class="col-md-6">
+                            <div class="card">
+                                {% if service.image %}
+                                <img src="{{ service.image.url }}" class="card-img-top service-card" alt="{{ service.title }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ service.title }}</h6>
+                                    <p class="card-text"><small>{{ service.description|truncatewords:15 }}</small></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <strong class="text-primary">₹{{ service.price }}</strong>
+                                        <a href="{% url 'services:service_detail' service.id %}" class="btn btn-sm btn-primary">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12 text-center">
+                            <p class="text-muted">No services listed yet</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-star"></i> Reviews</h5>
+                </div>
+                <div class="card-body">
+                    {% for review in reviews %}
+                    <div class="mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>{{ review.customer.get_full_name }}</strong>
+                                <div class="rating">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= review.rating %}
+                                            <i class="bi bi-star-fill"></i>
+                                        {% else %}
+                                            <i class="bi bi-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <small class="text-muted">{{ review.created_at|date:"M d, Y" }}</small>
+                        </div>
+                        <p class="mt-2 mb-0">{{ review.comment }}</p>
+                    </div>
+                    {% empty %}
+                    <p class="text-center text-muted">No reviews yet</p>
+                    {% endfor %}
+                    
+                    {% if reviews %}
+                    <div class="text-center mt-3">
+                        <a href="{% url 'reviews:freelancer_reviews' freelancer.id %}" class="btn btn-sm btn-outline-primary">
+                            View All Reviews
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

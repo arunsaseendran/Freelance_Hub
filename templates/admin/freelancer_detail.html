@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ freelancer.get_full_name }} - Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    body {
+        background: #0f0f1e;
+    }
+    
+    .profile-card {
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .profile-card h4,
+    .profile-card h5,
+    .profile-card h6 {
+        color: white;
+    }
+    
+    .profile-card p {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 800;
+        font-size: 3rem;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+    
+    .info-item {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .info-label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.3rem;
+    }
+    
+    .info-value {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+    }
+    
+    .action-card {
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .action-card h5 {
+        color: white;
+    }
+    
+    .service-item {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .service-item h6 {
+        color: white;
+    }
+    
+    .service-item small {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .service-item .fw-bold {
+        color: white;
+    }
+    
+    .booking-item {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        margin-bottom: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .booking-item h6 {
+        color: white;
+    }
+    
+    .booking-item small {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .status-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Admin Header -->
+<div class="admin-header">
+    <div class="container">
+        <a href="{% url 'accounts:admin_freelancer_list' %}" class="btn btn-light mb-3">
+            <i class="bi bi-arrow-left me-2"></i>Back to Freelancers
+        </a>
+        <h1 class="text-white fw-bold mb-2">
+            <i class="bi bi-person me-2"></i>Freelancer Details
+        </h1>
+        <p class="text-white-50 mb-0">View and manage freelancer information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Profile Information -->
+        <div class="col-lg-4">
+            <div class="profile-card">
+                <div class="text-center mb-4">
+                    <div class="profile-avatar mx-auto mb-3">
+                        {{ freelancer.first_name.0|upper }}{{ freelancer.last_name.0|upper }}
+                    </div>
+                    <h3 class="fw-bold mb-1">{{ freelancer.get_full_name }}</h3>
+                    <p class="text-muted mb-3">{{ freelancer.email }}</p>
+                    
+                    {% if freelancer.is_verified %}
+                    <span class="status-badge" style="background: #d1e7dd; color: #0f5132;">
+                        <i class="bi bi-check-circle me-1"></i>Approved
+                    </span>
+                    {% elif not freelancer.is_active %}
+                    <span class="status-badge" style="background: #f8d7da; color: #842029;">
+                        <i class="bi bi-x-circle me-1"></i>Suspended
+                    </span>
+                    {% else %}
+                    <span class="status-badge" style="background: #fff3cd; color: #856404;">
+                        <i class="bi bi-clock me-1"></i>Pending
+                    </span>
+                    {% endif %}
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value">{{ freelancer.phone|default:"Not provided" }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">City</div>
+                    <div class="info-value">{{ freelancer.city|default:"Not specified" }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Area</div>
+                    <div class="info-value">{{ freelancer.area|default:"Not specified" }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Pincode</div>
+                    <div class="info-value">{{ freelancer.pincode|default:"Not specified" }}</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Joined Date</div>
+                    <div class="info-value">{{ freelancer.created_at|date:"F d, Y" }}</div>
+                </div>
+                
+                {% if profile %}
+                <div class="info-item">
+                    <div class="info-label">Rating</div>
+                    <div class="info-value">
+                        <i class="bi bi-star-fill" style="color: #fbbf24;"></i>
+                        {{ profile.rating }} ({{ profile.total_reviews }} reviews)
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Experience</div>
+                    <div class="info-value">{{ profile.experience_years }} years</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Hourly Rate</div>
+                    <div class="info-value">₹{{ profile.hourly_rate }}</div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Action Card -->
+            <div class="action-card">
+                <h5 class="fw-bold mb-3">Actions</h5>
+                
+                {% if not freelancer.is_verified %}
+                <form method="post" action="{% url 'accounts:admin_approve_freelancer' freelancer.id %}" class="mb-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-check-circle me-2"></i>Approve Freelancer
+                    </button>
+                </form>
+                {% endif %}
+                
+                {% if freelancer.is_active %}
+                <form method="post" action="{% url 'accounts:admin_reject_freelancer' freelancer.id %}" class="mb-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning w-100" onclick="return confirm('Are you sure you want to suspend this freelancer?')">
+                        <i class="bi bi-pause-circle me-2"></i>Suspend Account
+                    </button>
+                </form>
+                {% else %}
+                <form method="post" action="{% url 'accounts:admin_approve_freelancer' freelancer.id %}" class="mb-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-play-circle me-2"></i>Activate Account
+                    </button>
+                </form>
+                {% endif %}
+                
+                <form method="post" action="{% url 'accounts:admin_delete_freelancer' freelancer.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Are you sure you want to delete this freelancer? This action cannot be undone.')">
+                        <i class="bi bi-trash me-2"></i>Delete Account
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Details Section -->
+        <div class="col-lg-8">
+            <!-- Profile Details -->
+            {% if profile %}
+            <div class="profile-card">
+                <h4 class="fw-bold mb-3">
+                    <i class="bi bi-person-badge me-2"></i>Profile Information
+                </h4>
+                
+                <div class="mb-3">
+                    <div class="info-label">Bio</div>
+                    <p class="mb-0">{{ profile.bio|default:"No bio provided" }}</p>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="info-label">Skills</div>
+                    <div>
+                        {% for skill in profile.skills_list %}
+                        <span class="badge bg-primary me-1 mb-1">{{ skill }}</span>
+                        {% empty %}
+                        <span class="text-muted">No skills listed</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-label">Payment Mode</div>
+                        <p class="fw-bold">{{ profile.get_payment_mode_display }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-label">GPay Number</div>
+                        <p class="fw-bold">{{ profile.gpay_number|default:"Not provided" }}</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="info-label">Total Bookings</div>
+                        <p class="fw-bold">{{ profile.total_bookings }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-label">Completed</div>
+                        <p class="fw-bold text-success">{{ profile.completed_bookings }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-label">Availability</div>
+                        <p class="fw-bold">
+                            {% if profile.is_available %}
+                            <span class="text-success">Available</span>
+                            {% else %}
+                            <span class="text-danger">Unavailable</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Services -->
+            <div class="profile-card">
+                <h4 class="fw-bold mb-3">
+                    <i class="bi bi-briefcase me-2"></i>Services ({{ services.count }})
+                </h4>
+                
+                {% for service in services %}
+                <div class="service-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="fw-bold mb-1">{{ service.title }}</h6>
+                            <small class="text-muted">{{ service.category.name }}</small>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">₹{{ service.price }}</div>
+                            <small class="text-muted">{{ service.duration }} mins</small>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted text-center py-3">No services added yet</p>
+                {% endfor %}
+            </div>
+            
+            <!-- Recent Bookings -->
+            <div class="profile-card">
+                <h4 class="fw-bold mb-3">
+                    <i class="bi bi-calendar-check me-2"></i>Recent Bookings ({{ bookings.count }})
+                </h4>
+                
+                {% for booking in bookings %}
+                <div class="booking-item">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="fw-bold mb-1">{{ booking.service.title }}</h6>
+                            <small class="text-muted">
+                                <i class="bi bi-person me-1"></i>{{ booking.customer.get_full_name }}
+                            </small>
+                            <br>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>{{ booking.booking_date|date:"M d, Y" }} at {{ booking.booking_time }}
+                            </small>
+                        </div>
+                        <span class="badge bg-{{ booking.status|default:'secondary' }}">
+                            {{ booking.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted text-center py-3">No bookings yet</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

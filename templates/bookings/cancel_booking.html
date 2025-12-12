@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancel Booking - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .alert-info {
+        background: rgba(13, 202, 240, 0.15) !important;
+        border: 1px solid rgba(13, 202, 240, 0.3) !important;
+        color: #9fdfff !important;
+    }
+    
+    .alert-info strong {
+        color: #0dcaf0 !important;
+    }
+    
+    .alert-success {
+        background: rgba(25, 135, 84, 0.15) !important;
+        border: 1px solid rgba(25, 135, 84, 0.3) !important;
+        color: #a3cfbb !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="mb-4 text-danger"><i class="bi bi-exclamation-triangle"></i> Cancel Booking</h2>
+                    
+                    <p>Are you sure you want to cancel this booking?</p>
+                    
+                    <div class="alert alert-info">
+                        <strong>Service:</strong> {{ booking.service.title }}<br>
+                        <strong>Date:</strong> {{ booking.booking_date }} {{ booking.booking_time }}<br>
+                        <strong>Amount:</strong> ₹{{ booking.total_amount }}
+                    </div>
+                    
+                    {% if booking.payment.payment_method == 'gpay' and booking.payment.status == 'completed' %}
+                    <div class="alert alert-success">
+                        <i class="bi bi-info-circle"></i> A refund will be initiated for this booking.
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Reason for Cancellation (Optional)</label>
+                            <textarea name="reason" class="form-control" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-x-circle"></i> Yes, Cancel Booking
+                            </button>
+                            <a href="{% url 'bookings:booking_detail' booking.id %}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

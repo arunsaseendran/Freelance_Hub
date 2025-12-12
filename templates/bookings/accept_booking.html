@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Accept Booking - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dark theme alerts */
+    .alert-info {
+        background: rgba(13, 202, 240, 0.15) !important;
+        border: 1px solid rgba(13, 202, 240, 0.3) !important;
+        color: #9fdfff !important;
+    }
+    
+    .alert-info strong {
+        color: #0dcaf0 !important;
+    }
+    
+    .alert-warning {
+        background: rgba(255, 193, 7, 0.15) !important;
+        border: 1px solid rgba(255, 193, 7, 0.3) !important;
+        color: #ffe69c !important;
+    }
+    
+    .alert-warning strong {
+        color: #ffc107 !important;
+    }
+    
+    .alert-danger {
+        background: rgba(220, 53, 69, 0.15) !important;
+        border: 1px solid rgba(220, 53, 69, 0.3) !important;
+        color: #f1aeb5 !important;
+    }
+    
+    .alert-danger strong {
+        color: #dc3545 !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="mb-4 text-success"><i class="bi bi-check-circle"></i> Accept Booking</h2>
+                    
+                    <p>Confirm that you want to accept this booking:</p>
+                    
+                    <div class="alert alert-info">
+                        <strong>Customer:</strong> {{ booking.customer.get_full_name }}<br>
+                        <strong>Service:</strong> {{ booking.service.title }}<br>
+                        <strong>Date:</strong> {{ booking.booking_date }} {{ booking.booking_time }}<br>
+                        <strong>Amount:</strong> ₹{{ booking.total_amount }}
+                    </div>
+                    
+                    {% if booking.customer_notes %}
+                    <div class="alert alert-warning">
+                        <strong>Customer Notes:</strong><br>
+                        {{ booking.customer_notes }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> <strong>Important:</strong> Once accepted, you cannot cancel this booking.
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check"></i> Accept Booking
+                            </button>
+                            <a href="{% url 'bookings:booking_detail' booking.id %}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

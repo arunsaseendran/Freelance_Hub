@@ -1,0 +1,58 @@
+================================================================================
+FREELANCER SERVICE BOOKING PLATFORM - QUICK START
+================================================================================
+
+SETUP ON NEW PC (First Time)
+================================================================================
+
+STEP 1: CREATE VIRTUAL ENVIRONMENT
+python -m venv venv
+
+
+STEP 2: ACTIVATE VIRTUAL ENVIRONMENT
+venv\Scripts\activate
+
+
+STEP 3: INSTALL DEPENDENCIES
+pip install -r requirements.txt
+
+
+STEP 4: RUN MIGRATIONS (Updates old database with new features)
+python manage.py makemigrations
+python manage.py migrate
+
+
+STEP 5: START SERVER
+python manage.py runserver
+
+
+STEP 6: OPEN BROWSER
+http://127.0.0.1:8000/
+
+
+================================================================================
+USING OLD DATABASE WITH NEW FEATURES
+================================================================================
+
+STEP 1: Copy old db.sqlite3 file to project folder
+
+STEP 2: Activate virtual environment
+venv\Scripts\activate
+
+STEP 3: Update database with new features
+python manage.py makemigrations
+python manage.py migrate
+
+STEP 4: Start server
+python manage.py runserver
+
+
+================================================================================
+DAILY USE (Already Set Up)
+================================================================================
+
+venv\Scripts\activate
+python manage.py runserver
+
+
+================================================================================

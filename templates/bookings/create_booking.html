@@ -1,0 +1,717 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Service - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .booking-form {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .form-floating {
+        position: relative;
+    }
+    
+    .form-floating > .form-control {
+        background: var(--bg-tertiary);
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        color: var(--text-primary);
+        padding: 1rem 0.75rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        height: calc(3.5rem + 2px);
+    }
+    
+    .form-floating > .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        background: var(--bg-card);
+    }
+    
+    .form-floating > label {
+        color: var(--text-primary);
+        padding: 1rem 0.75rem;
+        font-weight: 600;
+        opacity: 0.9;
+        background: transparent !important;
+    }
+    
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: var(--primary-color);
+        opacity: 1;
+        background: var(--bg-tertiary) !important;
+        padding: 0.25rem 0.5rem !important;
+        border-radius: 8px !important;
+        transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+    }
+    
+    /* Enhanced date and time input styling */
+    .form-floating > .form-control[type="date"],
+    .form-floating > .form-control[type="time"] {
+        position: relative;
+        background: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px;
+        border: 2px solid var(--border-color) !important;
+    }
+    
+    .form-floating > .form-control[type="date"]:focus,
+    .form-floating > .form-control[type="time"]:focus {
+        background: var(--bg-card) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--primary-color) !important;
+    }
+    
+    .form-floating > .form-control[type="date"]::-webkit-calendar-picker-indicator,
+    .form-floating > .form-control[type="time"]::-webkit-calendar-picker-indicator {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23667eea' d='M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6L8 9.5 4.5 6 8 2.5 11.5 6z'/%3e%3c/svg%3e");
+        background-color: transparent;
+        border-radius: 6px;
+        padding: 4px;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        filter: brightness(1.2);
+        width: 20px;
+        height: 20px;
+    }
+    
+    .form-floating > .form-control[type="date"]::-webkit-calendar-picker-indicator:hover,
+    .form-floating > .form-control[type="time"]::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: brightness(1.4);
+        background-color: rgba(102, 126, 234, 0.1);
+    }
+    
+    /* Custom styling for date/time placeholders */
+    .form-floating > .form-control[type="date"]:invalid,
+    .form-floating > .form-control[type="time"]:invalid {
+        color: var(--text-secondary);
+    }
+    
+    .form-floating > .form-control[type="date"]:valid,
+    .form-floating > .form-control[type="time"]:valid {
+        color: var(--text-primary) !important;
+        font-weight: 600;
+    }
+    
+    /* Custom date input styling */
+    .date-time-container {
+        position: relative;
+    }
+    
+    .date-time-container .form-floating {
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        background: transparent;
+    }
+    
+    .date-time-container:hover .form-floating {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .date-time-container .form-control,
+    .date-time-container input[type="date"],
+    .date-time-container input[type="time"] {
+        background: #2a2a3e !important;
+        color: #ffffff !important;
+        border: 2px solid #3a3a4e !important;
+        border-radius: 15px !important;
+        padding: 1rem 0.75rem !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+    }
+    
+    .date-time-container .form-control:focus,
+    .date-time-container input[type="date"]:focus,
+    .date-time-container input[type="time"]:focus {
+        background: #1e1e30 !important;
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+        outline: none !important;
+    }
+    
+    /* Ensure date/time input text is always visible */
+    .form-control[type="date"],
+    .form-control[type="time"] {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        background: #2a2a3e !important;
+        border: 2px solid #3a3a4e !important;
+    }
+    
+    /* Style the placeholder text for empty date/time inputs */
+    .form-control[type="date"]::-webkit-datetime-edit-text,
+    .form-control[type="date"]::-webkit-datetime-edit-month-field,
+    .form-control[type="date"]::-webkit-datetime-edit-day-field,
+    .form-control[type="date"]::-webkit-datetime-edit-year-field,
+    .form-control[type="time"]::-webkit-datetime-edit-text,
+    .form-control[type="time"]::-webkit-datetime-edit-hour-field,
+    .form-control[type="time"]::-webkit-datetime-edit-minute-field {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Fix placeholder appearance */
+    .form-control[type="date"]::-webkit-input-placeholder,
+    .form-control[type="time"]::-webkit-input-placeholder {
+        color: #a0a0b8 !important;
+        opacity: 1 !important;
+    }
+    
+    /* Ensure proper styling when empty */
+    .form-control[type="date"]:invalid,
+    .form-control[type="time"]:invalid {
+        color: #a0a0b8 !important;
+        background: #2a2a3e !important;
+    }
+    
+    .form-control[type="date"]:valid,
+    .form-control[type="time"]:valid {
+        color: #ffffff !important;
+        background: #2a2a3e !important;
+    }
+    
+    /* Label styling improvements */
+    .form-floating > label strong {
+        color: var(--text-primary);
+        font-size: 0.95rem;
+    }
+    
+    .form-floating > label i.text-primary {
+        color: var(--primary-color) !important;
+        font-size: 1rem;
+    }
+    
+    /* Dark theme for date/time picker popup */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+    
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+    
+    /* Specific styling for date/time floating labels */
+    .date-time-container .form-floating > label {
+        background: transparent !important;
+        color: var(--text-primary) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    .date-time-container .form-floating > .form-control:focus ~ label,
+    .date-time-container .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        background: transparent !important;
+        color: var(--primary-color) !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        opacity: 0 !important;
+    }
+    
+    /* Override Bootstrap's default white background */
+    .form-floating > .form-control:focus ~ label::before,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label::before,
+    .form-floating > .form-control:focus ~ label::after,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+        display: none !important;
+        background: transparent !important;
+    }
+    
+    /* Force dark background for all floating label states */
+    .form-floating > label::before,
+    .form-floating > label::after {
+        background: transparent !important;
+        content: none !important;
+    }
+    
+    /* Ensure no white backgrounds leak through */
+    .form-floating {
+        background: transparent !important;
+    }
+    
+    .form-floating::before,
+    .form-floating::after {
+        display: none !important;
+    }
+    
+    .payment-option {
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: var(--bg-tertiary);
+    }
+    
+    .payment-option:hover {
+        border-color: var(--primary-color);
+        background: var(--hover-bg);
+    }
+    
+    .payment-option.selected {
+        border-color: var(--primary-color);
+        background: rgba(102, 126, 234, 0.1);
+    }
+    
+    .payment-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+    
+    .razorpay-icon {
+        background: linear-gradient(135deg, #3395ff 0%, #3dd5f3 100%);
+        color: white;
+    }
+    
+    .cash-icon {
+        background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+        color: white;
+    }
+    
+    .gpay-icon {
+        background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+        color: white;
+    }
+    
+    .booking-summary {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        position: sticky;
+        top: 2rem;
+    }
+    
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+    
+    .step {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+    
+    .step::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 60%;
+        width: 80%;
+        height: 2px;
+        background: var(--border-color);
+        z-index: 1;
+    }
+    
+    .step:last-child::after {
+        display: none;
+    }
+    
+    .step.active::after {
+        background: var(--primary-color);
+    }
+    
+    .step-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--bg-tertiary);
+        border: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.5rem;
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+    
+    .step.active .step-circle {
+        background: var(--primary-gradient);
+        border-color: var(--primary-color);
+        color: white;
+    }
+    
+    .step.completed .step-circle {
+        background: var(--success-gradient);
+        border-color: #4caf50;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Progress Steps -->
+    <div class="step-indicator">
+        <div class="step active">
+            <div class="step-circle">
+                <i class="bi bi-calendar"></i>
+            </div>
+            <small>Service Details</small>
+        </div>
+        <div class="step">
+            <div class="step-circle">
+                <i class="bi bi-credit-card"></i>
+            </div>
+            <small>Payment</small>
+        </div>
+        <div class="step">
+            <div class="step-circle">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <small>Confirmation</small>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="booking-form">
+                <div class="card-body p-4">
+                    <h4 class="mb-4"><i class="bi bi-calendar-check me-2"></i>Booking Details</h4>
+                    
+                    <form method="post" id="bookingForm">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="id_booking_date" class="form-label mb-2" style="color: var(--text-primary); font-weight: 600;">
+                                    <i class="bi bi-calendar me-2" style="color: var(--primary-color);"></i>Service Date
+                                </label>
+                                <div class="date-time-container">
+                                    {{ form.booking_date }}
+                                </div>
+                                {% if form.booking_date.errors %}
+                                    <div class="text-danger mt-1">{{ form.booking_date.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label for="id_booking_time" class="form-label mb-2" style="color: var(--text-primary); font-weight: 600;">
+                                    <i class="bi bi-clock me-2" style="color: var(--primary-color);"></i>Service Time
+                                </label>
+                                <div class="date-time-container">
+                                    {{ form.booking_time }}
+                                </div>
+                                {% if form.booking_time.errors %}
+                                    <div class="text-danger mt-1">{{ form.booking_time.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="id_customer_notes" class="form-label mb-2" style="color: var(--text-primary); font-weight: 600;">
+                                <i class="bi bi-chat-text me-2" style="color: var(--primary-color);"></i>Special Instructions (Optional)
+                            </label>
+                            {{ form.customer_notes }}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3"><i class="bi bi-credit-card me-2"></i>Payment Method</h5>
+                            
+                            <!-- Razorpay Option -->
+                            <div class="payment-option" data-payment="razorpay">
+                                <div class="d-flex align-items-center">
+                                    <div class="payment-icon razorpay-icon">
+                                        <i class="bi bi-credit-card"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Pay Online (Recommended)</h6>
+                                        <small class="text-muted">Credit/Debit Card, UPI, Net Banking</small>
+                                        <div class="mt-1">
+                                            <span class="badge bg-success">Secure</span>
+                                            <span class="badge bg-info">Instant</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" value="razorpay" id="razorpay" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% if profile.payment_mode == 'cash' or profile.payment_mode == 'both' %}
+                            <!-- Cash Option -->
+                            <div class="payment-option" data-payment="cash">
+                                <div class="d-flex align-items-center">
+                                    <div class="payment-icon cash-icon">
+                                        <i class="bi bi-cash"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Cash Payment</h6>
+                                        <small class="text-muted">Pay after service completion</small>
+                                        <div class="mt-1">
+                                            <span class="badge bg-warning">Pay Later</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" value="cash" id="cash">
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> 
+                            <strong>Cancellation Policy:</strong> You can cancel this booking up to 30 minutes before the scheduled time for a full refund (if paid online).
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success btn-lg w-100">
+                            <i class="bi bi-check-circle"></i> Confirm Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Service Summary -->
+            <div class="booking-summary mb-3">
+                <div class="card-body p-4">
+                    <h5 class="mb-4"><i class="bi bi-receipt me-2"></i>Booking Summary</h5>
+                    
+                    {% if service.image %}
+                    <div class="text-center mb-3">
+                        <img src="{{ service.image.url }}" class="img-fluid rounded-3 shadow-sm" style="max-height: 150px; object-fit: cover;" alt="{{ service.title }}">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="service-info mb-4">
+                        <h6 class="fw-bold">{{ service.title }}</h6>
+                        <p class="text-muted small mb-2">{{ service.category.name }}</p>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-clock me-1"></i>
+                            <span>{{ service.duration }} minutes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-breakdown">
+                        <div class="d-flex justify-content-between py-2 border-bottom">
+                            <span>Service Fee:</span>
+                            <span>₹{{ service.price }}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between py-2 border-bottom" id="convenienceFee" style="display: none !important;">
+                            <span>Convenience Fee:</span>
+                            <span>₹0</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between py-3 border-bottom">
+                            <span>Taxes & Fees:</span>
+                            <span class="text-success">Free</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between py-3">
+                            <h5 class="mb-0">Total Amount:</h5>
+                            <h4 class="text-primary mb-0 fw-bold">₹{{ service.price }}</h4>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-success bg-opacity-10 rounded-3">
+                            <div class="d-flex align-items-center text-success">
+                                <i class="bi bi-shield-check me-2"></i>
+                                <small class="fw-medium">100% Secure Payment</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Freelancer Info -->
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if freelancer.profile_picture %}
+                    <img src="{{ freelancer.profile_picture.url }}" class="rounded-circle mb-2" style="width: 80px; height: 80px; object-fit: cover;" alt="{{ freelancer.get_full_name }}">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 80px; color: #ccc;"></i>
+                    {% endif %}
+                    
+                    <h6>{{ freelancer.get_full_name }}</h6>
+                    <div class="rating mb-2">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= profile.rating %}
+                                <i class="bi bi-star-fill"></i>
+                            {% else %}
+                                <i class="bi bi-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <small class="text-muted">
+                        {{ profile.experience_years }} years experience<br>
+                        {{ profile.completed_bookings }} jobs completed
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Razorpay SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Payment option selection
+    const paymentOptions = document.querySelectorAll('.payment-option');
+    const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+    
+    paymentOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+            
+            // Update visual selection
+            paymentOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Update convenience fee display
+            updateConvenienceFee(radio.value);
+        });
+    });
+    
+    // Initialize with default selection
+    const defaultRadio = document.querySelector('input[name="payment_method"]:checked');
+    if (defaultRadio) {
+        defaultRadio.closest('.payment-option').classList.add('selected');
+        updateConvenienceFee(defaultRadio.value);
+    }
+    
+    function updateConvenienceFee(paymentMethod) {
+        const convenienceFeeRow = document.getElementById('convenienceFee');
+        if (paymentMethod === 'razorpay') {
+            convenienceFeeRow.style.display = 'flex';
+        } else {
+            convenienceFeeRow.style.display = 'none';
+        }
+    }
+    
+    // Form submission with Razorpay integration
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.addEventListener('submit', function(e) {
+        const selectedPayment = document.querySelector('input[name="payment_method"]:checked').value;
+        
+        if (selectedPayment === 'razorpay') {
+            e.preventDefault();
+            initiateRazorpayPayment();
+        }
+        // For other payment methods, let the form submit normally
+    });
+    
+    function initiateRazorpayPayment() {
+        const servicePrice = parseFloat("{{ service.price }}");
+        const serviceName = "{{ service.title|escapejs }}";
+        const freelancerName = "{{ freelancer.get_full_name|escapejs }}";
+        
+        const options = {
+            "key": "rzp_test_1DP5mmOlF5G5ag", // Replace with your Razorpay key
+            "amount": servicePrice * 100, // Amount in paise
+            "currency": "INR",
+            "name": "FreelanceHub",
+            "description": serviceName,
+            "image": "/static/logo.png", // Add your logo
+            "order_id": "", // Will be generated from backend
+            "handler": function (response) {
+                // Payment successful
+                handlePaymentSuccess(response);
+            },
+            "prefill": {
+                "name": "{{ user.get_full_name|escapejs }}",
+                "email": "{{ user.email|escapejs }}",
+                "contact": "{{ user.phone|escapejs }}"
+            },
+            "notes": {
+                "service_id": "{{ service.id }}",
+                "freelancer_id": "{{ freelancer.id }}"
+            },
+            "theme": {
+                "color": "#667eea"
+            },
+            "modal": {
+                "ondismiss": function() {
+                    console.log('Payment cancelled');
+                }
+            }
+        };
+        
+        const rzp = new Razorpay(options);
+        rzp.open();
+    }
+    
+    function handlePaymentSuccess(response) {
+        // Add payment details to form
+        const form = document.getElementById('bookingForm');
+        
+        // Create hidden inputs for payment details
+        const paymentIdInput = document.createElement('input');
+        paymentIdInput.type = 'hidden';
+        paymentIdInput.name = 'razorpay_payment_id';
+        paymentIdInput.value = response.razorpay_payment_id;
+        form.appendChild(paymentIdInput);
+        
+        const orderIdInput = document.createElement('input');
+        orderIdInput.type = 'hidden';
+        orderIdInput.name = 'razorpay_order_id';
+        orderIdInput.value = response.razorpay_order_id || '';
+        form.appendChild(orderIdInput);
+        
+        const signatureInput = document.createElement('input');
+        signatureInput.type = 'hidden';
+        signatureInput.name = 'razorpay_signature';
+        signatureInput.value = response.razorpay_signature || '';
+        form.appendChild(signatureInput);
+        
+        // Submit the form
+        form.submit();
+    }
+    
+    // Date validation - prevent past dates
+    const dateInput = document.getElementById('id_booking_date');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+    
+    // Time validation - prevent past times for today
+    const timeInput = document.getElementById('id_booking_time');
+    if (timeInput && dateInput) {
+        function validateTime() {
+            const selectedDate = dateInput.value;
+            const today = new Date().toISOString().split('T')[0];
+            
+            if (selectedDate === today) {
+                const now = new Date();
+                const currentTime = now.getHours().toString().padStart(2, '0') + ':' + 
+                                  now.getMinutes().toString().padStart(2, '0');
+                timeInput.setAttribute('min', currentTime);
+            } else {
+                timeInput.removeAttribute('min');
+            }
+        }
+        
+        dateInput.addEventListener('change', validateTime);
+        validateTime(); // Initial validation
+    }
+});
+</script>
+{% endblock %}

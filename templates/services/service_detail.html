@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ service.title }} - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}" style="max-height: 400px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2">{{ service.category.name }}</span>
+                    {% if service.subcategory %}
+                    <span class="badge bg-secondary mb-2">{{ service.subcategory.name }}</span>
+                    {% endif %}
+                    
+                    <h2 class="card-title">{{ service.title }}</h2>
+                    
+                    <div class="mb-3">
+                        <h4 class="text-primary">₹{{ service.price }}</h4>
+                        <p class="text-muted"><i class="bi bi-clock"></i> Duration: {{ service.duration }} minutes</p>
+                    </div>
+                    
+                    <h5>Description</h5>
+                    <p>{{ service.description }}</p>
+                    
+                    <hr>
+                    
+                    <h5>Payment Options</h5>
+                    <p>
+                        {% if profile.payment_mode == 'cash' %}
+                            <span class="badge bg-success"><i class="bi bi-cash"></i> Cash Only</span>
+                        {% elif profile.payment_mode == 'gpay' %}
+                            <span class="badge bg-info"><i class="bi bi-phone"></i> GPay Only</span>
+                        {% else %}
+                            <span class="badge bg-success"><i class="bi bi-cash"></i> Cash</span>
+                            <span class="badge bg-info"><i class="bi bi-phone"></i> GPay</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Other Services by Freelancer -->
+            {% if other_services %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Other Services by {{ freelancer.get_full_name }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        {% for other in other_services %}
+                        <div class="col-md-6">
+                            <div class="card">
+                                {% if other.image %}
+                                <img src="{{ other.image.url }}" class="card-img-top" alt="{{ other.title }}" style="height: 150px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6>{{ other.title }}</h6>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <strong class="text-primary">₹{{ other.price }}</strong>
+                                        <a href="{% url 'services:service_detail' other.id %}" class="btn btn-sm btn-primary">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Freelancer Info -->
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    {% if freelancer.profile_picture %}
+                    <img src="{{ freelancer.profile_picture.url }}" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;" alt="{{ freelancer.get_full_name }}">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 100px; color: #ccc;"></i>
+                    {% endif %}
+                    
+                    <h5>{{ freelancer.get_full_name }}</h5>
+                    
+                    <div class="mb-3">
+                        <span class="rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= profile.rating %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <div><small>{{ profile.rating }}/5 ({{ profile.total_reviews }} reviews)</small></div>
+                    </div>
+                    
+                    <p class="text-muted">
+                        <i class="bi bi-geo-alt"></i> {{ freelancer.city }}, {{ freelancer.area }}<br>
+                        <i class="bi bi-briefcase"></i> {{ profile.experience_years }} years exp<br>
+                        <i class="bi bi-check-circle"></i> {{ profile.completed_bookings }} jobs done
+                    </p>
+                    
+                    <a href="{% url 'accounts:freelancer_detail' freelancer.id %}" class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-eye"></i> View Profile
+                    </a>
+                    
+                    {% if user.is_authenticated and user.user_type == 'customer' %}
+                        {% if profile.is_available %}
+                        <a href="{% url 'bookings:create_booking' service.id %}" class="btn btn-success w-100">
+                            <i class="bi bi-calendar-check"></i> Book Now
+                        </a>
+                        {% else %}
+                        <button class="btn btn-secondary w-100" disabled>
+                            Currently Unavailable
+                        </button>
+                        {% endif %}
+                    {% elif not user.is_authenticated %}
+                    <a href="{% url 'accounts:login' %}" class="btn btn-success w-100">
+                        <i class="bi bi-box-arrow-in-right"></i> Login to Book
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Service Stats -->
+            <div class="card">
+                <div class="card-body">
+                    <h6>Service Information</h6>
+                    <hr>
+                    <p class="mb-2"><i class="bi bi-calendar-plus"></i> Listed: {{ service.created_at|date:"M d, Y" }}</p>
+                    <p class="mb-2"><i class="bi bi-clock-history"></i> Updated: {{ service.updated_at|date:"M d, Y" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

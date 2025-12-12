@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4"><i class="bi bi-speedometer2"></i> Admin Dashboard</h2>
+    
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h6 class="card-title">Total Users</h6>
+                    <h2>{{ total_users }}</h2>
+                    <small>Customers: {{ total_customers }} | Freelancers: {{ total_freelancers }}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h6 class="card-title">Total Bookings</h6>
+                    <h2>{{ total_bookings }}</h2>
+                    <small>Completed: {{ completed_bookings }}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h6 class="card-title">Pending Bookings</h6>
+                    <h2>{{ pending_bookings }}</h2>
+                    <small>Awaiting action</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h6 class="card-title">Total Revenue</h6>
+                    <h2>₹{{ total_revenue|floatformat:2 }}</h2>
+                    <small>Pending Refunds: {{ pending_refunds }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Actions</h5>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="/admin/" class="btn btn-primary">
+                            <i class="bi bi-gear"></i> Django Admin
+                        </a>
+                        <a href="{% url 'payments:refund_list' %}" class="btn btn-warning">
+                            <i class="bi bi-cash-coin"></i> Manage Refunds
+                        </a>
+                        <a href="{% url 'services:category_list' %}" class="btn btn-info">
+                            <i class="bi bi-tags"></i> Manage Categories
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Bookings -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Bookings</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Freelancer</th>
+                                    <th>Service</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in recent_bookings %}
+                                <tr>
+                                    <td>#{{ booking.id }}</td>
+                                    <td>{{ booking.customer.username }}</td>
+                                    <td>{{ booking.freelancer.username }}</td>
+                                    <td>{{ booking.service.title|truncatewords:5 }}</td>
+                                    <td><span class="badge bg-{{ booking.status }}">{{ booking.get_status_display }}</span></td>
+                                    <td>₹{{ booking.total_amount }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center">No bookings yet</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Users</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for user in recent_users %}
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ user.username }}</strong><br>
+                                    <small class="text-muted">{{ user.get_user_type_display }}</small>
+                                </div>
+                                <span class="badge bg-primary">{{ user.created_at|date:"M d" }}</span>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-center">No users yet</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

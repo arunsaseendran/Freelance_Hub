@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews for {{ freelancer.get_full_name }} - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">Reviews for {{ freelancer.get_full_name }}</h2>
+            
+            {% for review in reviews %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <div>
+                            <h6 class="mb-1">{{ review.customer.get_full_name }}</h6>
+                            <div class="rating">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="bi bi-star-fill"></i>
+                                    {% else %}
+                                        <i class="bi bi-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <small class="text-muted">{{ review.created_at|date:"M d, Y" }}</small>
+                    </div>
+                    
+                    <p class="mb-2">{{ review.comment }}</p>
+                    
+                    {% if review.response %}
+                    <div class="alert alert-light mt-3">
+                        <strong>Freelancer Response:</strong><br>
+                        {{ review.response.response_text }}
+                        <br><small class="text-muted">{{ review.response.created_at|date:"M d, Y" }}</small>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-5">
+                <i class="bi bi-star" style="font-size: 4rem; color: #ccc;"></i>
+                <h4 class="mt-3">No reviews yet</h4>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if freelancer.profile_picture %}
+                    <img src="{{ freelancer.profile_picture.url }}" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 100px; color: #ccc;"></i>
+                    {% endif %}
+                    
+                    <h5>{{ freelancer.get_full_name }}</h5>
+                    
+                    <div class="mb-3">
+                        <span class="rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= freelancer.freelancer_profile.rating %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <div>{{ freelancer.freelancer_profile.rating }}/5</div>
+                        <small class="text-muted">{{ freelancer.freelancer_profile.total_reviews }} reviews</small>
+                    </div>
+                    
+                    <a href="{% url 'accounts:freelancer_detail' freelancer.id %}" class="btn btn-primary w-100">
+                        View Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4"><i class="bi bi-person"></i> My Profile</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <h5 class="mb-3">Personal Information</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                {{ user_form.first_name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                {{ user_form.last_name }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            {{ user_form.email }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            {{ user_form.phone }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            {{ user_form.address }}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">City</label>
+                                {{ user_form.city }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Area</label>
+                                {{ user_form.area }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Pincode</label>
+                                {{ user_form.pincode }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Profile Picture</label>
+                            {{ user_form.profile_picture }}
+                        </div>
+                        
+                        {% if freelancer_form %}
+                        <hr>
+                        <h5 class="mb-3">Freelancer Information</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Bio</label>
+                            {{ freelancer_form.bio }}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Experience (Years)</label>
+                                {{ freelancer_form.experience_years }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Hourly Rate (₹)</label>
+                                {{ freelancer_form.hourly_rate }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Skills (comma-separated)</label>
+                            {{ freelancer_form.skills }}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Payment Mode</label>
+                                {{ freelancer_form.payment_mode }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">GPay Number</label>
+                                {{ freelancer_form.gpay_number }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            {{ freelancer_form.is_available }}
+                            <label class="form-check-label" for="id_is_available">
+                                Available for bookings
+                            </label>
+                        </div>
+                        {% endif %}
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Profile">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 150px; color: #ccc;"></i>
+                    {% endif %}
+                    <h5>{{ user.get_full_name }}</h5>
+                    <p class="text-muted">@{{ user.username }}</p>
+                    <span class="badge bg-primary">{{ user.get_user_type_display }}</span>
+                </div>
+            </div>
+            
+            {% if user.user_type == 'freelancer' %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Statistics</h6>
+                    <hr>
+                    <p class="mb-2">
+                        <strong>Rating:</strong> 
+                        <span class="rating">{{ user.freelancer_profile.rating }}/5</span>
+                    </p>
+                    <p class="mb-2">
+                        <strong>Total Reviews:</strong> {{ user.freelancer_profile.total_reviews }}
+                    </p>
+                    <p class="mb-2">
+                        <strong>Completed Jobs:</strong> {{ user.freelancer_profile.completed_bookings }}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Danger Zone -->
+            <div class="card border-danger mt-4">
+                <div class="card-header bg-danger text-white">
+                    <h6 class="mb-0"><i class="bi bi-exclamation-triangle-fill me-2"></i>Danger Zone</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-danger">Delete Account</h6>
+                    <p class="text-muted mb-3">
+                        Once you delete your account, there is no going back. All your data, including bookings, 
+                        {% if user.user_type == 'freelancer' %}services, {% endif %}reviews, and transaction history will be permanently deleted.
+                    </p>
+                    <a href="{% url 'accounts:delete_account' %}" class="btn btn-danger">
+                        <i class="bi bi-trash-fill me-2"></i>Delete My Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

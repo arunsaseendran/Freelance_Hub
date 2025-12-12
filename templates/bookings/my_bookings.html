@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}My Bookings - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Remove white backgrounds from tables */
+    .table {
+        color: var(--text-primary);
+        background: transparent !important;
+    }
+    
+    .table thead th {
+        background: transparent !important;
+        color: var(--text-primary);
+        border-color: var(--border-color);
+        font-weight: 600;
+    }
+    
+    .table tbody tr {
+        background: transparent !important;
+        border-color: var(--border-color);
+    }
+    
+    .table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.1) !important;
+    }
+    
+    .table tbody td {
+        color: var(--text-primary);
+        border-color: var(--border-color);
+        background: transparent !important;
+    }
+    
+    /* Fix form controls */
+    .form-control {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+    }
+    
+    .form-control:focus {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        border-color: var(--primary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4"><i class="bi bi-calendar-check"></i> My Bookings</h2>
+    
+    <!-- Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <select name="status" class="form-control">
+                        <option value="">All Status</option>
+                        <option value="pending" {% if request.GET.status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="accepted" {% if request.GET.status == 'accepted' %}selected{% endif %}>Accepted</option>
+                        <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Completed</option>
+                        <option value="cancelled" {% if request.GET.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                        <option value="rejected" {% if request.GET.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-filter"></i> Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Bookings Table -->
+    {% if bookings %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            {% if user.user_type == 'customer' %}
+                            <th>Freelancer</th>
+                            {% else %}
+                            <th>Customer</th>
+                            {% endif %}
+                            <th>Service</th>
+                            <th>Date & Time</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>#{{ booking.id }}</td>
+                            {% if user.user_type == 'customer' %}
+                            <td>{{ booking.freelancer.get_full_name }}</td>
+                            {% else %}
+                            <td>{{ booking.customer.get_full_name }}</td>
+                            {% endif %}
+                            <td>{{ booking.service.title|truncatewords:5 }}</td>
+                            <td>{{ booking.booking_date }}<br><small>{{ booking.booking_time }}</small></td>
+                            <td>₹{{ booking.total_amount }}</td>
+                            <td>
+                                <span class="badge 
+                                    {% if booking.status == 'pending' %}bg-warning
+                                    {% elif booking.status == 'accepted' %}bg-info
+                                    {% elif booking.status == 'completed' %}bg-success
+                                    {% elif booking.status == 'cancelled' %}bg-danger
+                                    {% elif booking.status == 'rejected' %}bg-secondary
+                                    {% endif %}">
+                                    {{ booking.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{% url 'bookings:booking_detail' booking.id %}" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-calendar-x" style="font-size: 4rem; color: #ccc;"></i>
+        <h4 class="mt-3">No bookings found</h4>
+        {% if user.user_type == 'customer' %}
+        <p class="text-muted">Start by browsing services</p>
+        <a href="{% url 'services:service_list' %}" class="btn btn-primary">
+            <i class="bi bi-search"></i> Browse Services
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

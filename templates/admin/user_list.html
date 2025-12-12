@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Users - Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #0f0f1e;
+    }
+    
+    .admin-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-bar {
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .filter-tab {
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .filter-tab:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+    }
+    
+    .filter-tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: transparent;
+    }
+    
+    .user-card {
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+    }
+    
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        border-color: rgba(102, 126, 234, 0.3);
+    }
+    
+    .user-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 800;
+        font-size: 1.8rem;
+    }
+    
+    .user-card h5 {
+        color: white;
+    }
+    
+    .user-card .fw-bold {
+        color: white;
+    }
+    
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.3rem 0.8rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .type-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .type-customer {
+        background: #4facfe;
+        color: white;
+    }
+    
+    .type-freelancer {
+        background: #f093fb;
+        color: white;
+    }
+    
+    .status-active {
+        background: #d1e7dd;
+        color: #0f5132;
+    }
+    
+    .status-inactive {
+        background: #f8d7da;
+        color: #842029;
+    }
+    
+    .action-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Admin Header -->
+<div class="admin-header">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <a href="{% url 'accounts:admin_dash' %}" class="btn btn-light mb-3">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+                </a>
+                <h1 class="text-white fw-bold mb-2">
+                    <i class="bi bi-person-lines-fill me-2"></i>Manage Customers
+                </h1>
+                <p class="text-white-50 mb-0">View and manage customer accounts</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Search Bar -->
+    <div class="filter-bar">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h5 class="mb-0" style="color: white;">
+                    <i class="bi bi-people me-2"></i>Total Customers: <span class="badge bg-primary">{{ users.count }}</span>
+                </h5>
+            </div>
+            <div class="col-lg-6">
+                <form method="get" class="d-flex gap-2">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name, email, city..." value="{{ search_query }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Users List -->
+    <div class="row">
+        {% for user in users %}
+        <div class="col-12">
+            <div class="user-card">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="user-avatar">
+                            {{ user.first_name.0|upper }}{{ user.last_name.0|upper }}
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h5 class="fw-bold mb-1">{{ user.get_full_name }}</h5>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="info-badge">
+                                        <i class="bi bi-envelope"></i>
+                                        {{ user.email }}
+                                    </span>
+                                    <span class="info-badge">
+                                        <i class="bi bi-telephone"></i>
+                                        {{ user.phone|default:"Not provided" }}
+                                    </span>
+                                    <span class="info-badge">
+                                        <i class="bi bi-geo-alt"></i>
+                                        {{ user.city|default:"Not specified" }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                {% if user.is_active %}
+                                <span class="type-badge status-active">
+                                    <i class="bi bi-check-circle me-1"></i>Active
+                                </span>
+                                {% else %}
+                                <span class="type-badge status-inactive">
+                                    <i class="bi bi-x-circle me-1"></i>Inactive
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-3 mt-3">
+                            <div class="info-badge">
+                                <i class="bi bi-person-badge"></i>
+                                @{{ user.username }}
+                            </div>
+                            <div class="info-badge">
+                                <i class="bi bi-calendar"></i>
+                                Joined {{ user.created_at|date:"M d, Y" }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <div class="d-flex flex-column gap-2">
+                            <form method="post" action="{% url 'accounts:admin_toggle_user_status' user.id %}" class="d-inline">
+                                {% csrf_token %}
+                                {% if user.is_active %}
+                                <button type="submit" class="action-btn btn btn-warning w-100" onclick="return confirm('Deactivate this user?')">
+                                    <i class="bi bi-pause-circle me-1"></i>Deactivate
+                                </button>
+                                {% else %}
+                                <button type="submit" class="action-btn btn btn-success w-100">
+                                    <i class="bi bi-play-circle me-1"></i>Activate
+                                </button>
+                                {% endif %}
+                            </form>
+                            
+                            <form method="post" action="{% url 'accounts:admin_delete_user' user.id %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="action-btn btn btn-danger w-100" onclick="return confirm('Delete this user permanently?')">
+                                    <i class="bi bi-trash me-1"></i>Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="bi bi-inbox" style="font-size: 5rem; color: #e9ecef;"></i>
+                <h4 class="mt-3 text-white">No users found</h4>
+                <p class="text-muted">Try adjusting your filters or search query</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

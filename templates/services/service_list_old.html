@@ -1,0 +1,536 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .services-hero {
+        background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+        padding: 4rem 0 8rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .services-hero::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 30% 50%, rgba(102,126,234,0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(118,75,162,0.15) 0%, transparent 50%);
+    }
+    
+    .search-container {
+        margin-top: -4rem;
+        position: relative;
+        z-index: 10;
+        margin-bottom: 3rem;
+    }
+    
+    .quick-search {
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 3rem;
+    }
+    
+    .category-grid-section {
+        padding: 3rem 0;
+    }
+    
+    .category-filter-card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    
+    .category-filter-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        border-color: rgba(102, 126, 234, 0.5);
+    }
+    
+    .category-filter-card.active {
+        border-color: #667eea;
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        transform: scale(1.05);
+    }
+    
+    .category-icon {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        margin: 0 auto 1rem;
+        font-size: 2.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .category-filter-card:hover .category-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    .search-bar-wrapper {
+        position: relative;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .search-bar-input {
+        width: 100%;
+        padding: 1.2rem 4.5rem 1.2rem 3.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 60px;
+        font-size: 1rem;
+        color: white;
+        outline: none;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .search-bar-input:focus {
+        border-color: #667eea;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    }
+    
+    .search-bar-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .search-bar-icon {
+        position: absolute;
+        left: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.3rem;
+        color: #667eea;
+    }
+    
+    .search-bar-btn {
+        position: absolute;
+        right: 0.4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0.8rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .search-bar-btn:hover {
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+    
+    .filter-chips {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .filter-chip {
+        padding: 0.5rem 1.2rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 25px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-chip:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+    }
+    
+    .filter-chip i {
+        margin-left: 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    .view-toggle {
+        display: flex;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.3rem;
+        border-radius: 12px;
+    }
+    
+    .view-toggle-btn {
+        padding: 0.6rem 1rem;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .view-toggle-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .service-card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: 100%;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
+    }
+    
+    .service-card .card-img-top {
+        height: 240px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover .card-img-top {
+        transform: scale(1.1);
+    }
+    
+    .service-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #667eea;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
+    
+    .freelancer-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
+    
+    .freelancer-badge img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .price-tag {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        font-size: 1.8rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .rating-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    
+    .info-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 12px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+    
+    .info-chip i {
+        color: #667eea;
+    }
+    
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .sort-dropdown {
+        background: rgba(30, 30, 48, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 0.6rem 1.2rem;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="services-hero">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="text-center text-white mb-4">
+            <h1 class="display-4 fw-bold mb-3">Discover Amazing Services</h1>
+            <p class="lead" style="color: rgba(255,255,255,0.8);">Connect with talented professionals for your needs</p>
+        </div>
+    </div>
+</div>
+
+<div class="container search-container">
+    <!-- Quick Search -->
+    <div class="quick-search">
+        <form method="get" id="searchForm">
+            <div class="search-bar-wrapper">
+                <i class="bi bi-search search-bar-icon"></i>
+                <input type="text" name="query" class="search-bar-input" placeholder="Search for services..." value="{{ request.GET.query }}">
+                <button type="submit" class="search-bar-btn">
+                    <i class="bi bi-search me-1"></i>Search
+                </button>
+            </div>
+            
+            <!-- Active Filters -->
+            {% if request.GET.category or request.GET.city or request.GET.query %}
+            <div class="filter-chips">
+                {% if request.GET.query %}
+                <span class="filter-chip">
+                    Search: "{{ request.GET.query }}"
+                    <i class="bi bi-x-circle"></i>
+                </span>
+                {% endif %}
+                {% if request.GET.category %}
+                <span class="filter-chip">
+                    Category Filter
+                    <i class="bi bi-x-circle"></i>
+                </span>
+                {% endif %}
+                {% if request.GET.city %}
+                <span class="filter-chip">
+                    Location: {{ request.GET.city }}
+                    <i class="bi bi-x-circle"></i>
+                </span>
+                {% endif %}
+                <a href="{% url 'services:service_list' %}" class="filter-chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Clear All
+                </a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<!-- Category Grid -->
+<section class="category-grid-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold mb-2">Browse by Category</h2>
+            <p class="text-muted">Select a category to filter services</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- All Services Card -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="{% url 'services:service_list' %}" class="text-decoration-none">
+                    <div class="card text-center p-4 category-filter-card {% if not request.GET.category %}active{% endif %}">
+                        <div class="category-icon mx-auto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="bi bi-grid-3x3-gap text-white"></i>
+                        </div>
+                        <h5 class="fw-bold mb-0">All Services</h5>
+                        <small class="text-muted">View Everything</small>
+                    </div>
+                </a>
+            </div>
+            
+            {% for category in categories %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="{% url 'services:category_services' category.id %}" class="text-decoration-none">
+                    <div class="card text-center p-4 category-filter-card {% if request.resolver_match.kwargs.category_id|stringformat:'s' == category.id|stringformat:'s' %}active{% endif %}">
+                        <div class="category-icon mx-auto" style="background: linear-gradient(135deg, 
+                            {% cycle '#667eea 0%, #764ba2 100%' '#ffeaa7 0%, #fdcb6e 100%' '#f093fb 0%, #f5576c 100%' '#4facfe 0%, #00f2fe 100%' '#a8e063 0%, #56ab2f 100%' '#fa709a 0%, #fee140 100%' '#30cfd0 0%, #330867 100%' '#ff6e7f 0%, #bfe9ff 100%' %});">
+                            <i class="bi bi-{% cycle 'house-door' 'lightning' 'scissors' 'wrench' 'brush' 'palette' 'tree' 'book' 'laptop' 'code-slash' 'pencil' 'megaphone' 'camera-video' %} text-white"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">{{ category.name }}</h5>
+                        <small class="text-muted">{{ category.service_set.count }} services</small>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    
+    
+    <!-- Results Header -->
+    <div class="results-header mt-5">
+        <div>
+            <h3 class="fw-bold mb-1">Available Services</h3>
+            <p class="text-muted mb-0">{{ services|length }} service(s) found</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <select class="sort-dropdown">
+                <option>Sort by: Recommended</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Rating: High to Low</option>
+            </select>
+            <div class="view-toggle">
+                <button class="view-toggle-btn active" onclick="toggleView('grid')">
+                    <i class="bi bi-grid-3x3-gap"></i>
+                </button>
+                <button class="view-toggle-btn" onclick="toggleView('list')">
+                    <i class="bi bi-list-ul"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Services Grid -->
+    <div class="row g-4 pb-5" id="servicesGrid">
+        {% for service in services %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card service-card">
+                <div style="position: relative; overflow: hidden;">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}">
+                    {% else %}
+                    <div class="card-img-top" style="height: 240px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%); display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-briefcase" style="font-size: 4rem; color: #667eea; opacity: 0.5;"></i>
+                    </div>
+                    {% endif %}
+                    <span class="service-badge">{{ service.category.name }}</span>
+                    <div class="freelancer-badge">
+                        <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #667eea;"></i>
+                    </div>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold mb-0">{{ service.title }}</h5>
+                        {% if service.freelancer.freelancerprofile.rating %}
+                        <span class="rating-badge">
+                            <i class="bi bi-star-fill"></i>
+                            {{ service.freelancer.freelancerprofile.rating }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <p class="text-muted small mb-3">{{ service.description|truncatewords:12 }}</p>
+                    
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <div class="info-chip">
+                            <i class="bi bi-person"></i>
+                            <span>{{ service.freelancer.get_full_name|truncatewords:2 }}</span>
+                        </div>
+                        <div class="info-chip">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>{{ service.freelancer.city }}</span>
+                        </div>
+                        <div class="info-chip">
+                            <i class="bi bi-clock"></i>
+                            <span>{{ service.duration }}m</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center pt-3 mt-auto border-top">
+                        <div>
+                            <div class="text-muted small">Starting from</div>
+                            <div class="price-tag">₹{{ service.price }}</div>
+                        </div>
+                        <a href="{% url 'services:service_detail' service.id %}" class="btn btn-primary">
+                            Book Now <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-search" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></i>
+            </div>
+            <h3 class="fw-bold mb-2">No services found</h3>
+            <p class="text-muted">Try adjusting your search filters or browse all services</p>
+            <a href="{% url 'services:service_list' %}" class="btn btn-primary mt-3">
+                <i class="bi bi-arrow-clockwise me-2"></i>Clear Filters
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function filterByCategory(categoryId) {
+    const form = document.getElementById('searchForm');
+    const categorySelect = form.querySelector('select[name="category"]');
+    if (categorySelect) {
+        categorySelect.value = categoryId;
+        form.submit();
+    }
+}
+
+function toggleView(view) {
+    const grid = document.getElementById('servicesGrid');
+    const buttons = document.querySelectorAll('.view-toggle-btn');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.closest('.view-toggle-btn').classList.add('active');
+    
+    if (view === 'list') {
+        grid.classList.remove('row');
+        grid.classList.add('d-flex', 'flex-column', 'gap-3');
+        grid.querySelectorAll('.col-lg-4').forEach(col => {
+            col.classList.remove('col-lg-4', 'col-md-6');
+        });
+    } else {
+        grid.classList.add('row');
+        grid.classList.remove('d-flex', 'flex-column', 'gap-3');
+        grid.querySelectorAll('div').forEach(col => {
+            if (!col.classList.contains('col-lg-4')) {
+                col.classList.add('col-lg-4', 'col-md-6');
+            }
+        });
+    }
+}
+</script>
+{% endblock %}

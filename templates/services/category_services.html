@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} Services - FreelanceHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    .category-hero {
+        min-height: 40vh;
+        background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 4rem 0;
+    }
+    
+    .category-hero::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(102,126,234,0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(118,75,162,0.15) 0%, transparent 50%);
+        animation: heroFloat 20s ease-in-out infinite;
+    }
+    
+    @keyframes heroFloat {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-30px, -30px); }
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+    }
+    
+    .back-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+        transform: translateX(-5px);
+    }
+    
+    .category-icon-large {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 25px;
+        font-size: 3rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+    
+    .services-section {
+        padding: 3rem 0;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: rgba(30, 30, 48, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .section-header h3 {
+        margin: 0;
+        color: white;
+        font-weight: 800;
+    }
+    
+    .section-header p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .service-card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+    }
+    
+    .service-card-img-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px 20px 0 0;
+        height: 220px;
+    }
+    
+    .service-card .card-img-top {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover .card-img-top {
+        transform: scale(1.08);
+    }
+    
+    .service-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: white;
+        backdrop-filter: blur(10px);
+        padding: 0.4rem 1rem;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: #667eea;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        z-index: 2;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .price-tag {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        font-size: 1.8rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .rating-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    
+    .info-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 12px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+    
+    .info-chip i {
+        color: #667eea;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 5rem 2rem;
+    }
+    
+    .empty-state-icon {
+        font-size: 5rem;
+        color: #e9ecef;
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="category-hero">
+    <div class="container hero-content">
+        <a href="{% url 'services:service_list' %}" class="back-button">
+            <i class="bi bi-arrow-left"></i>
+            Back to All Services
+        </a>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="category-icon-large">
+                    <i class="bi bi-{% if 'Beauty' in category.name %}scissors{% elif 'Electrical' in category.name %}lightning{% elif 'Plumbing' in category.name %}wrench{% elif 'Home' in category.name or 'Cleaning' in category.name %}house-door{% elif 'Digital' in category.name or 'Web' in category.name or 'Graphic' in category.name %}laptop{% else %}briefcase{% endif %}"></i>
+                </div>
+                <h1 class="display-4 fw-bold text-white mb-3">{{ category.name }}</h1>
+                {% if category.description %}
+                <p class="lead text-white-50 mb-0">{{ category.description }}</p>
+                {% else %}
+                <p class="lead text-white-50 mb-0">Browse professional {{ category.name|lower }} services from verified freelancers</p>
+                {% endif %}
+            </div>
+            <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                <div class="d-inline-block">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <div style="font-size: 3rem; font-weight: 800; color: white;">{{ services|length }}</div>
+                        <div style="color: rgba(255, 255, 255, 0.8); font-weight: 600;">Services Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="services-section">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+            <div>
+                <h3>Available Services</h3>
+                <p>{{ services|length }} service(s) in {{ category.name }}</p>
+            </div>
+        </div>
+        
+        <!-- Services Grid -->
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card service-card">
+                    <div class="service-card-img-wrapper">
+                        {% if service.image %}
+                        <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}">
+                        {% else %}
+                        <div class="card-img-top" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-briefcase" style="font-size: 4rem; color: #667eea; opacity: 0.5;"></i>
+                        </div>
+                        {% endif %}
+                        {% if service.subcategory %}
+                        <span class="service-badge">{{ service.subcategory.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title fw-bold mb-0">{{ service.title }}</h5>
+                            {% if service.freelancer.freelancer_profile.rating %}
+                            <span class="rating-badge">
+                                <i class="bi bi-star-fill"></i>
+                                {{ service.freelancer.freelancer_profile.rating }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <p class="text-muted small mb-3">{{ service.description|truncatewords:12 }}</p>
+                        
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <div class="info-chip">
+                                <i class="bi bi-person"></i>
+                                <span>{{ service.freelancer.get_full_name|truncatewords:2 }}</span>
+                            </div>
+                            <div class="info-chip">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>{{ service.freelancer.city }}</span>
+                            </div>
+                            <div class="info-chip">
+                                <i class="bi bi-clock"></i>
+                                <span>{{ service.duration }}m</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center pt-3 mt-auto border-top">
+                            <div class="flex-grow-1">
+                                <div class="text-muted small mb-1">Starting from</div>
+                                <div class="price-tag">₹{{ service.price }}</div>
+                            </div>
+                            <a href="{% url 'services:service_detail' service.id %}" class="btn btn-primary" style="white-space: nowrap;">
+                                Book Now <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="bi bi-inbox"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">No services in this category yet</h3>
+                    <p class="text-muted mb-4">Check back soon or browse other categories</p>
+                    <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-arrow-left me-2"></i>Browse All Services
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

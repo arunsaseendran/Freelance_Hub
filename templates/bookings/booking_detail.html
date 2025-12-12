@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking #{{ booking.id }} - FreelanceHub{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-calendar-check"></i> Booking #{{ booking.id }}</h2>
+        <span class="badge badge-status 
+            {% if booking.status == 'pending' %}bg-warning
+            {% elif booking.status == 'accepted' %}bg-info
+            {% elif booking.status == 'completed' %}bg-success
+            {% elif booking.status == 'cancelled' %}bg-danger
+            {% elif booking.status == 'rejected' %}bg-secondary
+            {% endif %}">
+            {{ booking.get_status_display }}
+        </span>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Booking Details -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Booking Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Service:</strong> {{ booking.service.title }}</p>
+                            <p><strong>Category:</strong> {{ booking.service.category.name }}</p>
+                            <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+                            <p><strong>Time:</strong> {{ booking.booking_time }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Amount:</strong> ₹{{ booking.total_amount }}</p>
+                            <p><strong>Booked On:</strong> {{ booking.created_at|date:"M d, Y H:i" }}</p>
+                            {% if booking.accepted_at %}
+                            <p><strong>Accepted On:</strong> {{ booking.accepted_at|date:"M d, Y H:i" }}</p>
+                            {% endif %}
+                            {% if booking.completed_at %}
+                            <p><strong>Completed On:</strong> {{ booking.completed_at|date:"M d, Y H:i" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if booking.customer_notes %}
+                    <hr>
+                    <p><strong>Customer Notes:</strong></p>
+                    <p>{{ booking.customer_notes }}</p>
+                    {% endif %}
+                    
+                    {% if booking.freelancer_notes %}
+                    <hr>
+                    <p><strong>Freelancer Notes:</strong></p>
+                    <p>{{ booking.freelancer_notes }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Payment Info -->
+            {% if booking.payment %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Payment Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Payment Method:</strong> {{ booking.payment.get_payment_method_display }}</p>
+                    <p><strong>Amount:</strong> ₹{{ booking.payment.amount }}</p>
+                    <p><strong>Status:</strong> 
+                        <span class="badge 
+                            {% if booking.payment.status == 'completed' %}bg-success
+                            {% elif booking.payment.status == 'pending' %}bg-warning
+                            {% elif booking.payment.status == 'failed' %}bg-danger
+                            {% elif booking.payment.status == 'refunded' %}bg-info
+                            {% endif %}">
+                            {{ booking.payment.get_status_display }}
+                        </span>
+                    </p>
+                    {% if booking.payment.transaction_id %}
+                    <p><strong>Transaction ID:</strong> {{ booking.payment.transaction_id }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Actions -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mb-3">Actions</h5>
+                    <div class="d-flex gap-2 flex-wrap">
+                        {% if user == booking.customer %}
+                            {% if booking.can_cancel %}
+                            <a href="{% url 'bookings:cancel_booking' booking.id %}" class="btn btn-danger">
+                                <i class="bi bi-x-circle"></i> Cancel Booking
+                            </a>
+                            {% endif %}
+                            {% if booking.status == 'completed' and not booking.review %}
+                            <a href="{% url 'reviews:create_review' booking.id %}" class="btn btn-warning">
+                                <i class="bi bi-star"></i> Write Review
+                            </a>
+                            {% endif %}
+                        {% elif user == booking.freelancer %}
+                            {% if booking.status == 'pending' %}
+                            <a href="{% url 'bookings:accept_booking' booking.id %}" class="btn btn-success">
+                                <i class="bi bi-check"></i> Accept
+                            </a>
+                            <a href="{% url 'bookings:reject_booking' booking.id %}" class="btn btn-danger">
+                                <i class="bi bi-x"></i> Reject
+                            </a>
+                            {% elif booking.status == 'accepted' %}
+                            <a href="{% url 'bookings:complete_booking' booking.id %}" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Mark as Completed
+                            </a>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <a href="{% url 'bookings:my_bookings' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to Bookings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Customer Info (for freelancer) -->
+            {% if user == booking.freelancer %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Customer Information</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Name:</strong> {{ booking.customer.get_full_name }}</p>
+                    <p><strong>Email:</strong> {{ booking.customer.email }}</p>
+                    <p class="d-flex align-items-center justify-content-between">
+                        <span><strong>Phone:</strong> {{ booking.customer.phone }}</span>
+                        <a href="tel:{{ booking.customer.phone }}" class="btn btn-sm btn-success" title="Call Customer">
+                            <i class="bi bi-telephone-fill"></i> Call
+                        </a>
+                    </p>
+                    <p><strong>Address:</strong> {{ booking.customer.address }}</p>
+                    <p><strong>Location:</strong> {{ booking.customer.city }}, {{ booking.customer.area }}</p>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Freelancer Info (for customer) -->
+            {% if user == booking.customer %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Freelancer Information</h6>
+                </div>
+                <div class="card-body text-center">
+                    {% if booking.freelancer.profile_picture %}
+                    <img src="{{ booking.freelancer.profile_picture.url }}" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover;">
+                    {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 100px; color: #ccc;"></i>
+                    {% endif %}
+                    
+                    <h6>{{ booking.freelancer.get_full_name }}</h6>
+                    <p class="text-muted mb-2">{{ booking.freelancer.email }}</p>
+                    <p class="mb-3">{{ booking.freelancer.phone }}</p>
+                    
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="tel:{{ booking.freelancer.phone }}" class="btn btn-sm btn-success">
+                            <i class="bi bi-telephone-fill"></i> Call
+                        </a>
+                        <a href="{% url 'accounts:freelancer_detail' booking.freelancer.id %}" class="btn btn-sm btn-primary">
+                            <i class="bi bi-person"></i> View Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Service Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Service Information</h6>
+                </div>
+                <div class="card-body">
+                    {% if booking.service.image %}
+                    <img src="{{ booking.service.image.url }}" class="img-fluid rounded mb-2" alt="{{ booking.service.title }}">
+                    {% endif %}
+                    <h6>{{ booking.service.title }}</h6>
+                    <p class="text-muted">{{ booking.service.category.name }}</p>
+                    <p><small>{{ booking.service.description|truncatewords:20 }}</small></p>
+                    <a href="{% url 'services:service_detail' booking.service.id %}" class="btn btn-sm btn-outline-primary w-100">
+                        View Service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
