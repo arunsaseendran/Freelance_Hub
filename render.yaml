@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: freelance-hub
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn freelancer_platform.wsgi"
+    postDeployCommand: "python manage.py migrate"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: freelancer_platform.settings
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        sync: false
+      # add email / Razorpay keys as needed
