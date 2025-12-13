@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "staticfiles",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "freelancer-platform",
+          "region": "asia-south1"
+        }
+      }
+    ]
+  }
+}

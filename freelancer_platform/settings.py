@@ -19,15 +19,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-your-secret-key-change-in-production'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-your-secret-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 # CSRF trusted origins for browser preview
-CSRF_TRUSTED_ORIGINS = [
+_default_csrf_origins = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
     'http://127.0.0.1:56166',  # Current browser preview proxy
@@ -35,6 +35,12 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:*',  # Allow any port for development
     'http://localhost:*',
 ]
+
+extra_csrf = os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', '')
+if extra_csrf:
+    _default_csrf_origins.extend([origin.strip() for origin in extra_csrf.split(',') if origin.strip()])
+
+CSRF_TRUSTED_ORIGINS = _default_csrf_origins
 
 # Allow all origins in development (for browser preview with dynamic ports)
 if DEBUG:
