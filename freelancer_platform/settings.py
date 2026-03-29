@@ -34,9 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
 # =========================
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-
-# Detect Vercel build (collectstatic)
-IS_VERCEL_BUILD = 'collectstatic' in sys.argv
+IS_VERCEL_BUILD = os.getenv('VERCEL') == '1'
 
 if DATABASE_URL and not IS_VERCEL_BUILD:
     DATABASES = {
