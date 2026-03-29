@@ -1,0 +1,1989 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "0kzotn72qbl45w38ubpadw9wu7vg6pke",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSE-izEp0_sMaJdPcBKBZOwqyt1jSy6SbjTvzbyZx20tfutp8XNkVybZ5bcjDM9UDxAfWO-Nh1bXZSZ-KPyknU8tptftdP8OCvayr4NFQYpGTU7GbDMNOasgjIqJQhLC2mEEBAngCAwkJaVxewBrdDBKs88X8mw3OQ:1vSACV:Ksu08sLd-UoZ3sN0uQngfPyM-9qUi4dmR1QHwbVJ2NA",
+    "expire_date": "2025-12-21T08:33:03.091Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "10xlr6uhxeaycdp53qfj3j8xny69q7g9",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSE-izEp0_sMaJdPcBKBZOwqyt1jSy6SbjTvzbyZx20tfutp8XNkVybZ5bcjDM9UDxAfWO-Nh1bXZSZ-KPyknU8tptftdP8OCvayr4NFQYpGTU7GbDMNOasgjIqJQhLC2mEEBAngCAwkJaVxewBrdDBKs88X8mw3OQ:1vSACT:A2g1sIP30nl09Aq8cwtj2yoHmDsu1Mc0dD7KGb47W-c",
+    "expire_date": "2025-12-21T08:33:01.640Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5ojl43nvgr4977txabzrx2rv93wwiya6",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSE-izEp0_sMaJdPcBKBZOwqyt1jSy6SbjTvzbyZx20tfutp8XNkVybZ5bcjDM9UDxAfWO-Nh1bXZSZ-KPyknU8tptftdP8OCvayr4NFQYpGTU7GbDMNOasgjIqJQhLC2mEEBAngCAwkJaVxewBrdDBKs88X8mw3OQ:1vSACW:znn2Zz1Meco3B4geHoecZr6QlFGi94wxT0iYoWYdATE",
+    "expire_date": "2025-12-21T08:33:04.529Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ciuj064apwa36ecoi4o6ek7yy2ogaj7g",
+  "fields": {
+    "session_data": ".eJxVjDEOgzAMRe-SuYqwTULo2J0zRE7sFNoKJAJT1btXSAzt-t97_20i79sY96prnMRcDTbm8jsmzk-dDyIPnu-Lzcu8rVOyh2JPWu2wiL5up_t3MHIdjxqYQmEigtD13lOB4FkRU-FOQEvb5oBdckiCOfeuoewdiEIAKKLm8wX8_Df9:1vFqNx:XHjn7Ub6GOjUllph1q2l43oi2EqO0n7Fru7vWu9qFZM",
+    "expire_date": "2025-11-17T08:57:57.672Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dvjzuw4vb1raoc203uff07r23qk6ypfu",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSE-izEp0_sMaJdPcBKBZOwqyt1jSy6SbjTvzbyZx20tfutp8XNkVybZ5bcjDM9UDxAfWO-Nh1bXZSZ-KPyknU8tptftdP8OCvayr4NFQYpGTU7GbDMNOasgjIqJQhLC2mEEBAngCAwkJaVxewBrdDBKs88X8mw3OQ:1vSGuI:3thdYNEITB9I_RoWJaGSKAThEQJRfayFs7ggXs9Lzsg",
+    "expire_date": "2025-12-21T15:42:42.474Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "kkg1d3fs78fkpykrqxcvt2b3krxtwgre",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGU4enSvd9ApgxI1UBS2pXx35WkC93ec859sYD7VsLe0xoWYmcmJTv9jjPGR6qD0B3rrfHY6rYuMx8KP2jn10bpeTncv4OCvXxrFdHoSVsjRAbh0BAYOZF1BB4oeSVRGO-dUEZLylkAZLTa-2SHpNn7A9lfNwE:1vI6fk:qRe8-x-fjbM0GzkTmiB-g6an1oJc7Nubze8DoaEvjZ4",
+    "expire_date": "2025-11-23T14:45:40.375Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "m28c5hecaafoakbpkpp3tfmd5jexeppe",
+  "fields": {
+    "session_data": ".eJxVjDEOgzAMRe-SuYqwTULo2J0zRE7sFNoKJAJT1btXSAzt-t97_20i79sY96prnMRcDTbm8jsmzk-dDyIPnu-Lzcu8rVOyh2JPWu2wiL5up_t3MHIdjxqYQmEigtD13lOB4FkRU-FOQEvb5oBdckiCOfeuoewdiEIAKKLm8wX8_Df9:1vFqNv:j6KS7oZ_jtBM-871yUXJ-Ki9dZJ9-gMZ1ukcH--jTLA",
+    "expire_date": "2025-11-17T08:57:55.745Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "sczxoy38nhsun7b7je70ppumcmk5uz4q",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQAP-FsyGsyMuj934DWditVA0kpT0Z_92Q9KDXmcm8RcR9K3HvvMaFxFWAOP2yhPnJdQh6YL03mVvd1iXJkcjDdjk14tftaP8GBXsZ24tjyJo4YFaaCTE748mA52xVYPAzWE0B0CSwaBD12SnSXjtlwMzi8wX0GTfC:1vGrz8:5pxtXA0oWj8PwUIkgaIETPKkmaQ8Sb2Dsyf2O5-cRAA",
+    "expire_date": "2025-11-20T04:52:34.780Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vwnvbndguvun1uwzvhy00gnbr0e2xeis",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSE-izEp0_sMaJdPcBKBZOwqyt1jSy6SbjTvzbyZx20tfutp8XNkVybZ5bcjDM9UDxAfWO-Nh1bXZSZ-KPyknU8tptftdP8OCvayr4NFQYpGTU7GbDMNOasgjIqJQhLC2mEEBAngCAwkJaVxewBrdDBKs88X8mw3OQ:1vSGqG:mK7edcHP1t56teL5iwz2XdmdmEbmSyfTyPLCB3QDeGE",
+    "expire_date": "2025-12-21T15:38:32.156Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "z6bvtuagp5qp11yj565bnhx4etje9thx",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQAP-FsyGsyMuj934DWditVA0kpT0Z_92Q9KDXmcm8RcR9K3HvvMaFxFWAOP2yhPnJdQh6YL03mVvd1iXJkcjDdjk14tftaP8GBXsZ24tjyJo4YFaaCTE748mA52xVYPAzWE0B0CSwaBD12SnSXjtlwMzi8wX0GTfC:1vFUcP:rEmU7HiaZNLCNSkPMDxPmEFFPIWUEMh730sAn0_pAWI",
+    "expire_date": "2025-11-16T09:43:25.793Z"
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$NfO77dI1H9jeQz47nRYblA$zCr8x6WLLDg+u4DNB+McekKQ3suiBxIqyDeutbyks1Q=",
+    "last_login": "2026-03-29T14:39:30.082Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Admin",
+    "last_name": "User",
+    "email": "admin@freelancehub.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-01T12:59:33.241Z",
+    "user_type": "admin",
+    "phone": "",
+    "address": "",
+    "city": "",
+    "area": "",
+    "pincode": "",
+    "profile_picture": "",
+    "is_verified": false,
+    "created_at": "2025-11-01T12:59:33.882Z",
+    "updated_at": "2025-11-01T12:59:33.882Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$kBH8w8a8DP078dMWrFKFU1$uEvsLd/zDAMbZzSoTrKze5iq2z3iizvIBZipMXVu6GI=",
+    "last_login": "2025-11-02T05:32:59.521Z",
+    "is_superuser": false,
+    "username": "rajesh_electrician",
+    "first_name": "Rajesh",
+    "last_name": "Kumar",
+    "email": "rajesh.kumar@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:33.984Z",
+    "user_type": "freelancer",
+    "phone": "9876543210",
+    "address": "Edappally, Kochi, Kerala",
+    "city": "Kochi",
+    "area": "Edappally",
+    "pincode": "682024",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:34.608Z",
+    "updated_at": "2025-11-02T08:26:55.726Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$G3GJzCGbFs4oJTA02KCyGi$d7RcJRlIe5jY7SthtYXLDWptiADrRQyn5Cq6kG3Lc9g=",
+    "last_login": "2025-11-02T05:39:02.412Z",
+    "is_superuser": false,
+    "username": "sreelakshmi_beauty",
+    "first_name": "Sreelakshmi",
+    "last_name": "Nair",
+    "email": "sreelakshmi.nair@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:34.682Z",
+    "user_type": "freelancer",
+    "phone": "9876543211",
+    "address": "Kakkanad, Kochi, Kerala",
+    "city": "Kochi",
+    "area": "Kakkanad",
+    "pincode": "682030",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:35.330Z",
+    "updated_at": "2025-11-02T08:26:53.851Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$EEk9rgkuH0zDji3uOyJo8Z$GsIsQVO9iY68o/hlLIGRrK2+PSM+vvObnbCxzrtQrX0=",
+    "last_login": "2025-12-07T08:26:06.584Z",
+    "is_superuser": false,
+    "username": "arun_plumber",
+    "first_name": "Arun",
+    "last_name": "Krishnan",
+    "email": "arun.krishnan@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:35.398Z",
+    "user_type": "freelancer",
+    "phone": "9876543212",
+    "address": "Pattom, Thiruvananthapuram, Kerala",
+    "city": "Thiruvananthapuram",
+    "area": "Pattom",
+    "pincode": "695004",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:36.027Z",
+    "updated_at": "2025-11-02T08:26:51.332Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$bf11Awg8iQzFUAXv2oJT2S$3W75YzzDJsCmoN70waNtv2vGeUPXM8Q01xlABU2VJQk=",
+    "last_login": "2025-11-02T05:44:13.509Z",
+    "is_superuser": false,
+    "username": "divya_tutor",
+    "first_name": "Divya",
+    "last_name": "Menon",
+    "email": "divya.menon@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:36.098Z",
+    "user_type": "freelancer",
+    "phone": "9876543213",
+    "address": "Kazhakootam, Thiruvananthapuram, Kerala",
+    "city": "Thiruvananthapuram",
+    "area": "Kazhakootam",
+    "pincode": "695582",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:36.731Z",
+    "updated_at": "2025-11-02T08:26:48.645Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Nwk2L6Mjm2ADBzqEDkGTyW$/odyqOuIMNQy4uXojRVhI1PscXHmi/wE/ALxIaj8zRw=",
+    "last_login": "2025-11-02T05:49:43.325Z",
+    "is_superuser": false,
+    "username": "priya_cleaner",
+    "first_name": "Priya",
+    "last_name": "Varghese",
+    "email": "priya.varghese@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:37.514Z",
+    "user_type": "freelancer",
+    "phone": "9876543215",
+    "address": "Hilite City, Kozhikode, Kerala",
+    "city": "Kozhikode",
+    "area": "Hilite City",
+    "pincode": "673014",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:38.158Z",
+    "updated_at": "2025-11-02T08:26:45.963Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ecz4CjzqTWA3ZU0ke20emF$r1PtijZDIhii49GaY/kX/RHFLdApqSiiAkeZBAraA3I=",
+    "last_login": "2025-12-07T15:34:57.858Z",
+    "is_superuser": false,
+    "username": "suresh_painter",
+    "first_name": "Suresh",
+    "last_name": "Pillai",
+    "email": "suresh.pillai@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:38.231Z",
+    "user_type": "freelancer",
+    "phone": "9876543216",
+    "address": "Swaraj Round, Thrissur, Kerala",
+    "city": "Thrissur",
+    "area": "Swaraj Round",
+    "pincode": "680001",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:38.901Z",
+    "updated_at": "2025-12-07T15:35:20.104Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$NgnzU9ZcHuh0i5fTZUtx3i$S1OjuX9kHxGdudDA7DmQ3VlY3Hm7QkEc5eLsjVIKQPI=",
+    "last_login": "2025-12-07T07:59:15.256Z",
+    "is_superuser": false,
+    "username": "anjali_designer",
+    "first_name": "Anjali",
+    "last_name": "Suresh",
+    "email": "anjali.suresh@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:38.972Z",
+    "user_type": "freelancer",
+    "phone": "9876543217",
+    "address": "Thalassery, Kannur, Kerala",
+    "city": "Kannur",
+    "area": "Thalassery",
+    "pincode": "670101",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:39.644Z",
+    "updated_at": "2025-11-02T08:26:40.277Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$HCPNWIJibjzFLKUzZ2Eji4$MCODTa5CMZDYNb+WWKnBA04scGY1xxoETbo2uxpzbas=",
+    "last_login": "2025-11-02T05:56:49.471Z",
+    "is_superuser": false,
+    "username": "vineeth_mechanic",
+    "first_name": "Vineeth",
+    "last_name": "Thomas",
+    "email": "vineeth.thomas@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:39.714Z",
+    "user_type": "freelancer",
+    "phone": "9876543218",
+    "address": "Chinnakada, Kollam, Kerala",
+    "city": "Kollam",
+    "area": "Chinnakada",
+    "pincode": "691001",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:40.306Z",
+    "updated_at": "2025-11-02T08:26:36.855Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$KoHk3HAYj6EG0HnGMNnb1a$5kxefcZicBTkXv6ZPyvIO53CmLCLoZf4iAQOAYISero=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "lakshmi_cook",
+    "first_name": "Lakshmi",
+    "last_name": "Devi",
+    "email": "lakshmi.devi@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:40.361Z",
+    "user_type": "freelancer",
+    "phone": "9876543219",
+    "address": "Fort Maidan, Palakkad, Kerala",
+    "city": "Palakkad",
+    "area": "Fort Maidan",
+    "pincode": "678001",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:40.854Z",
+    "updated_at": "2025-11-02T08:21:44.344Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$VgwtVnPktwIsicg6bihXsC$GifIphXpfdBXnO4VOlK6OArlRb7s+ol/JWRn3dFMoGM=",
+    "last_login": "2025-12-07T15:31:48.722Z",
+    "is_superuser": false,
+    "username": "ravi_gardener",
+    "first_name": "Ravi",
+    "last_name": "Chandran",
+    "email": "ravi.chandran@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:40.907Z",
+    "user_type": "freelancer",
+    "phone": "9876543220",
+    "address": "Manjeri, Malappuram, Kerala",
+    "city": "Malappuram",
+    "area": "Manjeri",
+    "pincode": "676121",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:41.338Z",
+    "updated_at": "2025-11-02T07:53:20.556Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$hLqxYTiU69ghnpbjs2cqoN$sbZhtQZdX9qi0+BYliKjSaQXc87d0rNQ4+/Zq4JTyYw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "reshma_tailor",
+    "first_name": "Reshma",
+    "last_name": "Beevi",
+    "email": "reshma.beevi@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-01T16:01:41.402Z",
+    "user_type": "freelancer",
+    "phone": "9876543221",
+    "address": "MC Road, Kottayam, Kerala",
+    "city": "Kottayam",
+    "area": "MC Road",
+    "pincode": "686001",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-01T16:01:41.842Z",
+    "updated_at": "2025-11-02T07:53:09.003Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$mctcnyEjjPqp90jUnQY3Iv$ct6hSf46QhWTCiyt2u0qoZUrQJCHIZP4q8tNDSgwlyU=",
+    "last_login": "2025-11-02T08:10:17.242Z",
+    "is_superuser": false,
+    "username": "arun_designer",
+    "first_name": "Arun",
+    "last_name": "S",
+    "email": "arun@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-02T08:10:16.516Z",
+    "user_type": "freelancer",
+    "phone": "9526949544",
+    "address": "Np house",
+    "city": "Vatakara",
+    "area": "Vatakara",
+    "pincode": "673542",
+    "profile_picture": "",
+    "is_verified": true,
+    "created_at": "2025-11-02T08:10:17.187Z",
+    "updated_at": "2025-11-02T08:21:40.967Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$FNeDXhzYAtKqBnjdazTp1H$oKPTphoUo9dpvLm+CrOWDMMFwpqLRO6q2pwf0eyGJ9A=",
+    "last_login": "2025-12-07T15:28:38.449Z",
+    "is_superuser": false,
+    "username": "Nayana_05",
+    "first_name": "Nayana",
+    "last_name": "Pradeep",
+    "email": "divyapradeep06@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-09T14:45:38.371Z",
+    "user_type": "customer",
+    "phone": "8137281400",
+    "address": "LOVESHORE ENCLAVE,TALAP",
+    "city": "Kannur",
+    "area": "Talap",
+    "pincode": "670001",
+    "profile_picture": "",
+    "is_verified": false,
+    "created_at": "2025-11-09T14:45:40.324Z",
+    "updated_at": "2025-11-09T14:45:40.324Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "rajesh_electrician"
+    ],
+    "bio": "Professional service provider with 5 years of expertise. Quality guaranteed.",
+    "experience_years": 5,
+    "skills": "Home Cleaning, Organization, Deep Cleaning",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "808.00",
+    "is_available": true,
+    "rating": "3.66",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "sreelakshmi_beauty"
+    ],
+    "bio": "3 years of experience delivering excellent results. Let's work together!",
+    "experience_years": 3,
+    "skills": "Plumbing, Pipe Repair, Installation",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "451.00",
+    "is_available": true,
+    "rating": "4.83",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "arun_plumber"
+    ],
+    "bio": "Skilled freelancer with 7 years of experience. Customer satisfaction is my priority.",
+    "experience_years": 7,
+    "skills": "Home Cleaning, Organization, Deep Cleaning",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "674.00",
+    "is_available": true,
+    "rating": "4.63",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "divya_tutor"
+    ],
+    "bio": "Passionate about my work with 5 years of hands-on experience.",
+    "experience_years": 5,
+    "skills": "Python, Django, Web Development",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "558.00",
+    "is_available": false,
+    "rating": "4.84",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "priya_cleaner"
+    ],
+    "bio": "Skilled freelancer with 1 years of experience. Customer satisfaction is my priority.",
+    "experience_years": 1,
+    "skills": "Graphic Design, Photoshop, Illustrator",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "248.00",
+    "is_available": false,
+    "rating": "4.91",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "suresh_painter"
+    ],
+    "bio": "Skilled freelancer with 4 years of experience. Customer satisfaction is my priority.",
+    "experience_years": 4,
+    "skills": "Home Cleaning, Organization, Deep Cleaning",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "424.00",
+    "is_available": true,
+    "rating": "4.30",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "anjali_designer"
+    ],
+    "bio": "Professional service provider with 5 years of expertise. Quality guaranteed.",
+    "experience_years": 5,
+    "skills": "Home Cleaning, Organization, Deep Cleaning",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "888.00",
+    "is_available": true,
+    "rating": "5.00",
+    "total_reviews": 1,
+    "total_bookings": 0,
+    "completed_bookings": 1
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "vineeth_mechanic"
+    ],
+    "bio": "Skilled freelancer with 15 years of experience. Customer satisfaction is my priority.",
+    "experience_years": 15,
+    "skills": "Content Writing, SEO, Copywriting",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "1532.00",
+    "is_available": true,
+    "rating": "4.31",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "lakshmi_cook"
+    ],
+    "bio": "Experienced professional with 3 years in the industry. Dedicated to delivering quality work.",
+    "experience_years": 3,
+    "skills": "Graphic Design, Photoshop, Illustrator",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "447.00",
+    "is_available": true,
+    "rating": "3.88",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "ravi_gardener"
+    ],
+    "bio": "Professional service provider with 4 years of expertise. Quality guaranteed.",
+    "experience_years": 4,
+    "skills": "Carpentry, Furniture Making, Repairs",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "387.00",
+    "is_available": true,
+    "rating": "4.61",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "reshma_tailor"
+    ],
+    "bio": "Passionate about my work with 7 years of hands-on experience.",
+    "experience_years": 7,
+    "skills": "Graphic Design, Photoshop, Illustrator",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "593.00",
+    "is_available": false,
+    "rating": "5.00",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.freelancerprofile",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "arun_designer"
+    ],
+    "bio": "",
+    "experience_years": 0,
+    "skills": "",
+    "payment_mode": "both",
+    "gpay_number": "",
+    "hourly_rate": "0.00",
+    "is_available": true,
+    "rating": "0.00",
+    "total_reviews": 0,
+    "total_bookings": 0,
+    "completed_bookings": 0
+  }
+},
+{
+  "model": "accounts.customerprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "Nayana_05"
+    ],
+    "total_bookings": 0
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 8,
+  "fields": {
+    "email": "a9526949544@gmail.com",
+    "otp": "349852",
+    "created_at": "2025-11-02T09:34:14.360Z",
+    "is_verified": false
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 11,
+  "fields": {
+    "email": "00134arun.s@gmail.com",
+    "otp": "039459",
+    "created_at": "2025-11-02T09:41:16.899Z",
+    "is_verified": true
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 12,
+  "fields": {
+    "email": "nandanapradeep155@gmail.com",
+    "otp": "364893",
+    "created_at": "2025-11-02T10:15:03.547Z",
+    "is_verified": true
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 13,
+  "fields": {
+    "email": "arundrivestorage2@gmail.com",
+    "otp": "137579",
+    "created_at": "2025-11-02T10:25:28.404Z",
+    "is_verified": true
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 14,
+  "fields": {
+    "email": "divyapradeep06@gmail.com",
+    "otp": "107447",
+    "created_at": "2025-11-03T09:09:34.143Z",
+    "is_verified": true
+  }
+},
+{
+  "model": "accounts.emailotp",
+  "pk": 15,
+  "fields": {
+    "email": "divyapradeep06@gmail.com",
+    "otp": "148080",
+    "created_at": "2025-11-09T14:45:03.441Z",
+    "is_verified": true
+  }
+},
+{
+  "model": "services.category",
+  "pk": 1,
+  "fields": {
+    "name": "Home Cleaning",
+    "description": "Professional home cleaning services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.824Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 2,
+  "fields": {
+    "name": "Electrical Work",
+    "description": "Electrical installation and repair services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.893Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 3,
+  "fields": {
+    "name": "Beauty Care",
+    "description": "Beauty and personal care services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.926Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 4,
+  "fields": {
+    "name": "Plumbing",
+    "description": "Plumbing services and repairs",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.967Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 5,
+  "fields": {
+    "name": "Tutoring",
+    "description": "Educational tutoring services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 6,
+  "fields": {
+    "name": "Carpentry",
+    "description": "Woodwork and furniture services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.041Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 7,
+  "fields": {
+    "name": "Painting",
+    "description": "Interior and exterior painting services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.074Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 8,
+  "fields": {
+    "name": "Gardening",
+    "description": "Garden maintenance and landscaping",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.106Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 9,
+  "fields": {
+    "name": "Graphic Design",
+    "description": "Professional graphic design services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.439Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 10,
+  "fields": {
+    "name": "Web Development",
+    "description": "Website and web application development",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.488Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 11,
+  "fields": {
+    "name": "Content Writing",
+    "description": "Professional content writing services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.530Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 12,
+  "fields": {
+    "name": "Digital Marketing",
+    "description": "Digital marketing and SEO services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.571Z"
+  }
+},
+{
+  "model": "services.category",
+  "pk": 13,
+  "fields": {
+    "name": "Video Editing",
+    "description": "Professional video editing services",
+    "icon": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.612Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "name": "Deep Cleaning",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.868Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "name": "Regular Cleaning",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.877Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 3,
+  "fields": {
+    "category": 1,
+    "name": "Move-in/Move-out Cleaning",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.885Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 4,
+  "fields": {
+    "category": 2,
+    "name": "Wiring",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.901Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 5,
+  "fields": {
+    "category": 2,
+    "name": "Appliance Repair",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.910Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 6,
+  "fields": {
+    "category": 2,
+    "name": "Installation",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.918Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 7,
+  "fields": {
+    "category": 3,
+    "name": "Hair Styling",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.934Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 8,
+  "fields": {
+    "category": 3,
+    "name": "Makeup",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.942Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 9,
+  "fields": {
+    "category": 3,
+    "name": "Spa Services",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.950Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 10,
+  "fields": {
+    "category": 3,
+    "name": "Nail Care",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.959Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 11,
+  "fields": {
+    "category": 4,
+    "name": "Pipe Repair",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.975Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 12,
+  "fields": {
+    "category": 4,
+    "name": "Installation",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.983Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 13,
+  "fields": {
+    "category": 4,
+    "name": "Drain Cleaning",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:43.992Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 14,
+  "fields": {
+    "category": 5,
+    "name": "Mathematics",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.008Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 15,
+  "fields": {
+    "category": 5,
+    "name": "Science",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.016Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 16,
+  "fields": {
+    "category": 5,
+    "name": "Languages",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.025Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 17,
+  "fields": {
+    "category": 5,
+    "name": "Computer Science",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.033Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 18,
+  "fields": {
+    "category": 6,
+    "name": "Furniture Repair",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.049Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 19,
+  "fields": {
+    "category": 6,
+    "name": "Custom Furniture",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.057Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 20,
+  "fields": {
+    "category": 6,
+    "name": "Installation",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.065Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 21,
+  "fields": {
+    "category": 7,
+    "name": "Interior Painting",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.082Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 22,
+  "fields": {
+    "category": 7,
+    "name": "Exterior Painting",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.090Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 23,
+  "fields": {
+    "category": 7,
+    "name": "Wall Design",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.098Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 24,
+  "fields": {
+    "category": 8,
+    "name": "Lawn Care",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.114Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 25,
+  "fields": {
+    "category": 8,
+    "name": "Plant Care",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.122Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 26,
+  "fields": {
+    "category": 8,
+    "name": "Landscaping",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-01T12:59:44.131Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 27,
+  "fields": {
+    "category": 9,
+    "name": "Logo Design",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.456Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 28,
+  "fields": {
+    "category": 9,
+    "name": "Branding",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.465Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 29,
+  "fields": {
+    "category": 9,
+    "name": "Social Media Graphics",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.473Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 30,
+  "fields": {
+    "category": 9,
+    "name": "Print Design",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.481Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 31,
+  "fields": {
+    "category": 10,
+    "name": "Frontend Development",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.496Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 32,
+  "fields": {
+    "category": 10,
+    "name": "Backend Development",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.504Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 33,
+  "fields": {
+    "category": 10,
+    "name": "Full Stack",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.511Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 34,
+  "fields": {
+    "category": 10,
+    "name": "WordPress",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.520Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 35,
+  "fields": {
+    "category": 11,
+    "name": "Blog Writing",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.538Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 36,
+  "fields": {
+    "category": 11,
+    "name": "Copywriting",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.547Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 37,
+  "fields": {
+    "category": 11,
+    "name": "Technical Writing",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.556Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 38,
+  "fields": {
+    "category": 11,
+    "name": "SEO Content",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.564Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 39,
+  "fields": {
+    "category": 12,
+    "name": "SEO",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.577Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 40,
+  "fields": {
+    "category": 12,
+    "name": "Social Media Marketing",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.584Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 41,
+  "fields": {
+    "category": 12,
+    "name": "Email Marketing",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.593Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 42,
+  "fields": {
+    "category": 12,
+    "name": "PPC Advertising",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.602Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 43,
+  "fields": {
+    "category": 13,
+    "name": "YouTube Videos",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.620Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 44,
+  "fields": {
+    "category": 13,
+    "name": "Corporate Videos",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.627Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 45,
+  "fields": {
+    "category": 13,
+    "name": "Social Media Videos",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.637Z"
+  }
+},
+{
+  "model": "services.subcategory",
+  "pk": 46,
+  "fields": {
+    "category": 13,
+    "name": "Animation",
+    "description": "",
+    "is_active": true,
+    "created_at": "2025-11-02T05:13:16.644Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 1,
+  "fields": {
+    "freelancer": [
+      "rajesh_electrician"
+    ],
+    "category": 2,
+    "subcategory": null,
+    "title": "Home Electrical Repairs",
+    "description": "Expert in home wiring, fan installation, and electrical troubleshooting. 10+ years experience.",
+    "price": "500.00",
+    "duration": 120,
+    "image": "services/electric.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:34.664Z",
+    "updated_at": "2025-11-02T08:27:47.741Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 2,
+  "fields": {
+    "freelancer": [
+      "rajesh_electrician"
+    ],
+    "category": 2,
+    "subcategory": null,
+    "title": "AC Installation & Repair",
+    "description": "Professional AC installation, servicing and repair for all brands.",
+    "price": "800.00",
+    "duration": 180,
+    "image": "services/ac.jpeg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:34.674Z",
+    "updated_at": "2025-11-02T08:27:50.690Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 3,
+  "fields": {
+    "freelancer": [
+      "sreelakshmi_beauty"
+    ],
+    "category": 3,
+    "subcategory": null,
+    "title": "Bridal Makeup",
+    "description": "Traditional Kerala bridal makeup with modern touch. Specialized in South Indian bridal looks.",
+    "price": "5000.00",
+    "duration": 180,
+    "image": "services/Milan-bridal-makeup-a1.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:35.382Z",
+    "updated_at": "2025-11-02T08:27:54.602Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 4,
+  "fields": {
+    "freelancer": [
+      "sreelakshmi_beauty"
+    ],
+    "category": 3,
+    "subcategory": null,
+    "title": "Hair Styling & Spa",
+    "description": "Professional hair styling, spa treatments, and hair care services at home.",
+    "price": "1500.00",
+    "duration": 120,
+    "image": "services/hair_and_spa.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:35.390Z",
+    "updated_at": "2025-11-02T08:27:44.901Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 5,
+  "fields": {
+    "freelancer": [
+      "arun_plumber"
+    ],
+    "category": 4,
+    "subcategory": null,
+    "title": "Plumbing Repairs",
+    "description": "All types of plumbing work - pipe leaks, bathroom fittings, water tank installation.",
+    "price": "600.00",
+    "duration": 90,
+    "image": "services/plumbing.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:36.081Z",
+    "updated_at": "2025-11-02T08:27:40.397Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 6,
+  "fields": {
+    "freelancer": [
+      "arun_plumber"
+    ],
+    "category": 4,
+    "subcategory": null,
+    "title": "Bathroom Renovation",
+    "description": "Complete bathroom plumbing renovation and modern fitting installation.",
+    "price": "3000.00",
+    "duration": 480,
+    "image": "services/bathroom.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:36.090Z",
+    "updated_at": "2025-11-02T08:27:36.639Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 7,
+  "fields": {
+    "freelancer": [
+      "divya_tutor"
+    ],
+    "category": 5,
+    "subcategory": null,
+    "title": "Mathematics Tuition (Class 8-12)",
+    "description": "Expert mathematics tutor for CBSE/State board. Specialized in board exam preparation.",
+    "price": "800.00",
+    "duration": 60,
+    "image": "services/maths.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:36.789Z",
+    "updated_at": "2025-11-02T08:27:33.151Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 8,
+  "fields": {
+    "freelancer": [
+      "divya_tutor"
+    ],
+    "category": 5,
+    "subcategory": null,
+    "title": "Science Tuition",
+    "description": "Physics, Chemistry, Biology tuition for high school students. Concept-based teaching.",
+    "price": "900.00",
+    "duration": 60,
+    "image": "services/sccience.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:36.798Z",
+    "updated_at": "2025-11-02T08:27:29.556Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 11,
+  "fields": {
+    "freelancer": [
+      "priya_cleaner"
+    ],
+    "category": 1,
+    "subcategory": null,
+    "title": "Deep House Cleaning",
+    "description": "Complete house deep cleaning including kitchen, bathrooms, and all rooms.",
+    "price": "1200.00",
+    "duration": 240,
+    "image": "services/download.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:38.212Z",
+    "updated_at": "2025-11-02T08:27:25.547Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 12,
+  "fields": {
+    "freelancer": [
+      "priya_cleaner"
+    ],
+    "category": 1,
+    "subcategory": null,
+    "title": "Kitchen Cleaning",
+    "description": "Professional kitchen cleaning with eco-friendly products. Chimney and stove cleaning included.",
+    "price": "600.00",
+    "duration": 120,
+    "image": "services/clean_kitch.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:38.223Z",
+    "updated_at": "2025-11-02T08:27:21.079Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 13,
+  "fields": {
+    "freelancer": [
+      "suresh_painter"
+    ],
+    "category": 7,
+    "subcategory": null,
+    "title": "Interior House Painting",
+    "description": "Professional interior painting with premium quality paints. Color consultation included.",
+    "price": "8000.00",
+    "duration": 480,
+    "image": "services/residential-painting-in-visakhapatnam.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:38.956Z",
+    "updated_at": "2025-11-02T08:27:17.844Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 14,
+  "fields": {
+    "freelancer": [
+      "suresh_painter"
+    ],
+    "category": 7,
+    "subcategory": null,
+    "title": "Exterior Painting",
+    "description": "Weather-resistant exterior painting for homes and buildings.",
+    "price": "5000.00",
+    "duration": 600,
+    "image": "services/exterior.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:38.964Z",
+    "updated_at": "2025-11-02T08:27:14.848Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 15,
+  "fields": {
+    "freelancer": [
+      "anjali_designer"
+    ],
+    "category": 3,
+    "subcategory": null,
+    "title": "Mehendi Design",
+    "description": "Traditional and modern mehendi designs for weddings and festivals. Kerala style specialty.",
+    "price": "1500.00",
+    "duration": 120,
+    "image": "services/download_1.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:39.697Z",
+    "updated_at": "2025-11-02T08:27:12.535Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 16,
+  "fields": {
+    "freelancer": [
+      "anjali_designer"
+    ],
+    "category": 3,
+    "subcategory": null,
+    "title": "Saree Draping",
+    "description": "Professional saree draping in various Kerala and South Indian styles.",
+    "price": "500.00",
+    "duration": 30,
+    "image": "services/featuredsareedrapingstyleforbride.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:39.706Z",
+    "updated_at": "2025-11-02T08:27:09.085Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 17,
+  "fields": {
+    "freelancer": [
+      "ravi_gardener"
+    ],
+    "category": 8,
+    "subcategory": null,
+    "title": "Garden Maintenance",
+    "description": "Complete garden maintenance - pruning, weeding, lawn care. Kerala tropical plants expert.",
+    "price": "800.00",
+    "duration": 180,
+    "image": "services/istockphoto-1166203849-612x612.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:41.387Z",
+    "updated_at": "2025-11-02T08:22:30.815Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 18,
+  "fields": {
+    "freelancer": [
+      "ravi_gardener"
+    ],
+    "category": 8,
+    "subcategory": null,
+    "title": "Terrace Garden Setup",
+    "description": "Design and setup of terrace gardens with Kerala native plants and vegetables.",
+    "price": "3000.00",
+    "duration": 240,
+    "image": "services/Vertical-Garden-in-Terrace.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-01T16:01:41.395Z",
+    "updated_at": "2025-11-02T08:22:10.870Z"
+  }
+},
+{
+  "model": "services.service",
+  "pk": 19,
+  "fields": {
+    "freelancer": [
+      "arun_designer"
+    ],
+    "category": 9,
+    "subcategory": null,
+    "title": "UI UX",
+    "description": "UI/UX is the design of the visual and interactive elements of a product, and the user's overall experience with it",
+    "price": "5000.00",
+    "duration": 300,
+    "image": "services/download_2.jpg",
+    "is_active": true,
+    "is_approved": true,
+    "created_at": "2025-11-02T08:12:15.713Z",
+    "updated_at": "2025-11-02T08:22:08.341Z"
+  }
+},
+{
+  "model": "bookings.booking",
+  "pk": 6,
+  "fields": {
+    "customer": [
+      "Nayana_05"
+    ],
+    "freelancer": [
+      "ravi_gardener"
+    ],
+    "service": 18,
+    "booking_date": "2025-12-10",
+    "booking_time": "10:00:00",
+    "status": "confirmed",
+    "customer_notes": "",
+    "freelancer_notes": "",
+    "total_amount": "3000.00",
+    "created_at": "2025-12-07T07:38:00.840Z",
+    "updated_at": "2025-12-07T07:38:00.856Z",
+    "accepted_at": null,
+    "completed_at": null,
+    "cancelled_at": null
+  }
+},
+{
+  "model": "bookings.booking",
+  "pk": 7,
+  "fields": {
+    "customer": [
+      "Nayana_05"
+    ],
+    "freelancer": [
+      "anjali_designer"
+    ],
+    "service": 16,
+    "booking_date": "2025-12-07",
+    "booking_time": "13:25:00",
+    "status": "completed",
+    "customer_notes": "",
+    "freelancer_notes": "",
+    "total_amount": "500.00",
+    "created_at": "2025-12-07T07:49:24.431Z",
+    "updated_at": "2025-12-07T07:59:25.194Z",
+    "accepted_at": "2025-12-07T07:50:21.184Z",
+    "completed_at": "2025-12-07T07:59:25.193Z",
+    "cancelled_at": null
+  }
+},
+{
+  "model": "bookings.booking",
+  "pk": 8,
+  "fields": {
+    "customer": [
+      "Nayana_05"
+    ],
+    "freelancer": [
+      "arun_plumber"
+    ],
+    "service": 5,
+    "booking_date": "2025-12-07",
+    "booking_time": "13:45:00",
+    "status": "confirmed",
+    "customer_notes": "",
+    "freelancer_notes": "",
+    "total_amount": "600.00",
+    "created_at": "2025-12-07T08:03:47.754Z",
+    "updated_at": "2025-12-07T08:03:47.766Z",
+    "accepted_at": null,
+    "completed_at": null,
+    "cancelled_at": null
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 10,
+  "fields": {
+    "booking": 6,
+    "status": "pending",
+    "notes": "Booking created",
+    "changed_by": [
+      "Nayana_05"
+    ],
+    "changed_at": "2025-12-07T07:38:00.845Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 11,
+  "fields": {
+    "booking": 6,
+    "status": "confirmed",
+    "notes": "Status changed from pending to confirmed",
+    "changed_by": null,
+    "changed_at": "2025-12-07T07:38:00.860Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 12,
+  "fields": {
+    "booking": 7,
+    "status": "pending",
+    "notes": "Booking created",
+    "changed_by": [
+      "Nayana_05"
+    ],
+    "changed_at": "2025-12-07T07:49:24.437Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 13,
+  "fields": {
+    "booking": 7,
+    "status": "accepted",
+    "notes": "Status changed from pending to accepted",
+    "changed_by": null,
+    "changed_at": "2025-12-07T07:50:21.192Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 14,
+  "fields": {
+    "booking": 7,
+    "status": "completed",
+    "notes": "Status changed from accepted to completed",
+    "changed_by": null,
+    "changed_at": "2025-12-07T07:59:25.200Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 15,
+  "fields": {
+    "booking": 8,
+    "status": "pending",
+    "notes": "Booking created",
+    "changed_by": [
+      "Nayana_05"
+    ],
+    "changed_at": "2025-12-07T08:03:47.758Z"
+  }
+},
+{
+  "model": "bookings.bookinghistory",
+  "pk": 16,
+  "fields": {
+    "booking": 8,
+    "status": "confirmed",
+    "notes": "Status changed from pending to confirmed",
+    "changed_by": null,
+    "changed_at": "2025-12-07T08:03:47.769Z"
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 6,
+  "fields": {
+    "booking": 6,
+    "customer": [
+      "Nayana_05"
+    ],
+    "amount": "3000.00",
+    "payment_method": "razorpay",
+    "status": "completed",
+    "transaction_id": "pay_RodqXJ8IlEynin",
+    "payment_date": null,
+    "payment_details": "{\"razorpay_payment_id\": \"pay_RodqXJ8IlEynin\", \"razorpay_order_id\": \"\", \"razorpay_signature\": \"\"}",
+    "notes": "",
+    "created_at": "2025-12-07T07:38:00.850Z",
+    "updated_at": "2025-12-07T07:38:00.850Z"
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 7,
+  "fields": {
+    "booking": 7,
+    "customer": [
+      "Nayana_05"
+    ],
+    "amount": "500.00",
+    "payment_method": "cash",
+    "status": "completed",
+    "transaction_id": "",
+    "payment_date": "2025-12-07T07:59:25.215Z",
+    "payment_details": "",
+    "notes": "",
+    "created_at": "2025-12-07T07:49:24.443Z",
+    "updated_at": "2025-12-07T07:59:25.215Z"
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 8,
+  "fields": {
+    "booking": 8,
+    "customer": [
+      "Nayana_05"
+    ],
+    "amount": "600.00",
+    "payment_method": "razorpay",
+    "status": "completed",
+    "transaction_id": "pay_RoeHm4UQyfNevk",
+    "payment_date": null,
+    "payment_details": "{\"razorpay_payment_id\": \"pay_RoeHm4UQyfNevk\", \"razorpay_order_id\": \"\", \"razorpay_signature\": \"\"}",
+    "notes": "",
+    "created_at": "2025-12-07T08:03:47.761Z",
+    "updated_at": "2025-12-07T08:03:47.761Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 2,
+  "fields": {
+    "booking": 7,
+    "customer": [
+      "Nayana_05"
+    ],
+    "freelancer": [
+      "anjali_designer"
+    ],
+    "rating": 5,
+    "comment": "I recently got my saree draped and absolutely loved how it turned out! The draping was neat, elegant, and enhanced the whole look. Felt super confident and beautiful!",
+    "is_active": true,
+    "created_at": "2025-12-07T08:01:31.390Z",
+    "updated_at": "2025-12-07T08:01:31.390Z"
+  }
+}
+]
