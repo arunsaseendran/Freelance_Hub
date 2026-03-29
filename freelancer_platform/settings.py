@@ -34,9 +34,11 @@ CSRF_TRUSTED_ORIGINS = [
 # =========================
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-IS_VERCEL_BUILD = os.getenv('VERCEL') == '1'
 
-if DATABASE_URL and not IS_VERCEL_BUILD:
+# Only skip DB during collectstatic build, use postgres at runtime
+IS_COLLECT_STATIC = 'collectstatic' in sys.argv
+
+if DATABASE_URL and not IS_COLLECT_STATIC:
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
@@ -48,7 +50,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': '/tmp/db.sqlite3',  # /tmp is writable on Vercel
         }
     }
 
