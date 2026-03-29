@@ -4,6 +4,7 @@ Django settings for freelancer_platform project.
 
 from pathlib import Path
 import os
+import sys
 import dj_database_url
 
 # Load .env if available
@@ -13,13 +14,13 @@ try:
 except ImportError:
     pass
 
+# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-change-this')
 DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() == 'true'
 
-# Allow all (change later for production)
 ALLOWED_HOSTS = ["*"]
 
 # CSRF trusted origins
@@ -28,7 +29,34 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
 ]
 
-# APPS
+# =========================
+# ✅ DATABASE CONFIG (FINAL FIX)
+# =========================
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+# Detect Vercel build (collectstatic)
+IS_VERCEL_BUILD = 'collectstatic' in sys.argv
+
+if DATABASE_URL and not IS_VERCEL_BUILD:
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+# =========================
+
+# APPLICATIONS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,32 +104,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'freelancer_platform.wsgi.application'
 
-# =========================
-# ✅ DATABASE CONFIG (FIXED)
-# =========================
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-
-if DATABASE_URL:
-    # Use Neon / PostgreSQL
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True
-        )
-    }
-else:
-    # Local SQLite fallback
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-# =========================
-
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -136,7 +138,7 @@ LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# EMAIL
+# EMAIL CONFIG
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
